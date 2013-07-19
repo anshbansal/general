@@ -1,5 +1,5 @@
 def prob_002(num):
-    '''Returns the sum of even fibonnaci numbers'''
+    '''Returns the sum of even fibonnaci numbers below num'''
     a, b = 1, 2
     total = 0
     while b < num:
@@ -12,4 +12,4 @@ def prob_002(num):
     return total
 
 if __name__ == "__main__":
-    print prob_002(4000000)
+    print(prob_002(4000000))

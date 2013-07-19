@@ -1,42 +1,34 @@
 import os
 
-TOP = ['project_euler', 'codechef', 'spoj', 'functions',
-       'utilities']
-CODECHEF = ['easy', 'medium', 'hard']
-
 def safe_make_folder(i):
-    '''Makes a folder if not present'''
-    try:  
-        os.mkdir(os.path.dirname(os.path.realpath(os.curdir)) +
+    '''Makes a folder and its parent if not present'''
+    try:
+        os.makedirs(os.path.dirname(os.path.realpath(os.curdir)) +
                  os.sep + i)
     except:
         pass
 
-def make_top_level(top):
-    for i in top:
+def make_top_level():
+    '''Makes folders with no subdirectories'''
+    for i in ('spoj', 'functions', 'utilities'):
         safe_make_folder(i)
 
-def make_euler_folders(highest):
-    def folder_names():
-        '''Generates strings of the format 001_050 with
-        the 2nd number given by the function argument'''
-        for i in range(1,highest, 50):
-            yield (
-                'project_euler' + os.sep +
-                str(i).zfill(3) + '_' + str(i + 49).zfill(3)
-                )
-            
-    for i in folder_names():
-        safe_make_folder(i)
+def make_euler_folders():
+    '''Makes euler and its subdirectories'''
+    HIGHEST = 450
+    for j in (os.path.join('project_euler', '{:03}_{:03}'.format(i, i + 49))
+              for i in range(1,HIGHEST, 50)):
+        safe_make_folder(j)
 
-def make_codechef_folders(codechef):
-    for i in codechef:
-        safe_make_folder('codechef' + os.sep + i)
+def make_codechef_folders():
+    '''Makes codechef and its subdirectories'''
+    for i in ('easy', 'medium', 'hard'):
+        safe_make_folder(os.path.join('codechef', i))
 
 def main():
-    make_top_level(TOP)
-    make_euler_folders(450)
-    make_codechef_folders(CODECHEF)
+    make_top_level()
+    make_euler_folders()
+    make_codechef_folders()
 
 if __name__ == "__main__":
     main()

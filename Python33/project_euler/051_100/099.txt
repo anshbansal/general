@@ -1,4 +1,4 @@
-nums ="""519432,525806
+519432,525806
 632382,518061
 78864,613712
 466580,530130
@@ -998,16 +998,3 @@ nums ="""519432,525806
 325361,545187
 172115,573985
 13846,725685
-"""
-nums = nums.splitlines()
-M = [i.split(",") for i in nums]
-M = [[int(j) for j in i]for i in M]
-
-import math
-
-largest = 0
-for i in xrange(1000):
-    current = M[i][1] * math.log(M[i][0])
-    if current > largest:
-        largest = current
-        print i + 1

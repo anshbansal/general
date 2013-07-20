@@ -3,14 +3,13 @@ import os
 def safe_make_folder(i):
     '''Makes a folder and its parent if not present'''
     try:
-        os.makedirs(os.path.dirname(os.path.realpath(os.curdir)) +
-                 os.sep + i)
+        os.makedirs(i)
     except:
         pass
 
 def make_top_level():
     '''Makes folders with no subdirectories'''
-    for i in ('spoj', 'functions', 'utilities'):
+    for i in ('spoj', 'functions', 'utilities', '_testing'):
         safe_make_folder(i)
 
 def make_euler_folders():

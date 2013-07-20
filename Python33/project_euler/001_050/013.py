@@ -3,7 +3,7 @@ def prob_013():
         with open('013.txt') as f:
             total = 0
             for line in f:
-                total += int(line[:-1])
+                total += int(line)
             return str(total)[:10]
     except:
         return 0

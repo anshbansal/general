@@ -1,11 +1,11 @@
 def prob_008():
-    with open('008.txt') as f:
-        try:
+    try:
+        with open('008.txt') as f:
             number = ''
             for line in f:
                 number += line[:-1]
-        except:
-            return 0
+    except:
+        return 0
 
     largest = 0
     for i in range(995):

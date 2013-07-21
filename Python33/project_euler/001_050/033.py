@@ -1,20 +1,17 @@
 from fractions import Fraction as f
+from itertools import product
 
-ans = f(1,1)
-for num in xrange(10,100):
-    for den in xrange(10,100):
+def prob_033():
+    ans = f(1,1)
+    for num, den in product(range(10,100), repeat = 2):
         if num >= den:
             continue
 
         num_list = [i for i in str(num)]
         den_list = [i for i in str(den)]
+        temp = [i for i in num_list if i in den_list]
 
-        temp = []
-        for i in num_list:
-            if i in den_list:
-                temp.append(i)
-
-        if len(temp) != 1 or temp[0] == '0':
+        if len(temp) is not 1 or '0' in temp:
             continue
 
         num_list.remove(temp[0])
@@ -23,10 +20,13 @@ for num in xrange(10,100):
         num2 = int(num_list[0])
         den2 = int(den_list[0])
 
-        if num2 == 0 or den2 == 0:
+        if not(num2 and den2):
             continue
-
+        
         if f(num,den) == f(num2,den2):
             ans *= f(num,den)
 
-print ans
+    return ans
+
+if __name__ == "__main__":
+    print(prob_033())

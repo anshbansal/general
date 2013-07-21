@@ -1,18 +1,14 @@
+import itertools
+import math
 def prob_003(num):
     '''Returns the largest prime factor of an odd number'''
-    i = 3
-    while i <= num:
-        if num % i:
-            pass
-        else:
+    ans = 0
+    sqrt_num = math.floor(math.sqrt(num))
+    for i in itertools.chain([2], range(3, sqrt_num, 2)):
+        while not (num % i):
             ans = i
-            while True:
-                num //= i
-                if num % i:
-                    break
-        i += 2
-
-    return ans
+            num //= i
+    return ans if ans else num
 
 if __name__ == "__main__":
     print(prob_003(600851475143))

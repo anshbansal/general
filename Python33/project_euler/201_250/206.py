@@ -1,6 +1,5 @@
 #Taking 22 seconds
 import math
-import time
 
 def prob_206():
     #num1 = int(math.sqrt(10203040506070809))
@@ -19,6 +18,7 @@ def prob_206():
                 return i * 10
 
 if __name__ == "__main__":
+    import time
     s = time.time()
     print(prob_206())
     print (time.time() - s)

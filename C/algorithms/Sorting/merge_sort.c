@@ -19,18 +19,18 @@ static void merge_parts(int arr[], int length)
         ans[k++] = (arr[i] < arr[j]) ? arr[i++] : arr[j++];
     }
 
-    while(i < mid){
+    while (i < mid){
         ans[k++] = arr[i++];
     }
 
-    for(i = 0; i < j; i++){
+    for (i = 0; i < j; i++){
         arr[i] = ans[i];
     }
 }
 
 void merge_sort(int arr[], int length)
 {
-    if(length > 1)
+    if (length > 1)
     {
         int mid = length/2;
         merge_sort(arr,         mid);

@@ -1,3 +1,4 @@
+#! python3
 import os
 
 TOP_LEVEL = ('spoj', 'functions', 'utilities', '_testing')

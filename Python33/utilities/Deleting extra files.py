@@ -1,3 +1,5 @@
+#! python3
+
 #Part of my automatation for managing my code content
 #Cleans up my offline C git repository
 #Deletes unneeded files from the repository
@@ -26,5 +28,4 @@ def main(startpath):
         for name in cur_files(files):
             os.remove(path + "\\" + name)
     
-cur = os.getcwd() + "\\..\\..\\C_codes\\"
-main(cur)
+main(os.getcwd() + "\\..\\..\\C\\")

@@ -15,23 +15,22 @@ static void merge_parts(int arr[], int length)
     int ans[length];
 	int mid = length/2;
     int i = 0, k = 0, j = mid;
-    while (i < mid && j < length){
+    while (i < mid && j < length) {
         ans[k++] = (arr[i] < arr[j]) ? arr[i++] : arr[j++];
     }
 
-    while (i < mid){
+    while (i < mid) {
         ans[k++] = arr[i++];
     }
 
-    for (i = 0; i < j; i++){
+    for (i = 0; i < j; i++) {
         arr[i] = ans[i];
     }
 }
 
 void merge_sort(int arr[], int length)
 {
-    if (length > 1)
-    {
+    if (length > 1) {
         int mid = length/2;
         merge_sort(arr,         mid);
         merge_sort(arr + mid,   length - mid);
@@ -42,32 +41,29 @@ void merge_sort(int arr[], int length)
 int main()
 {
     int length;
-    for (;;)
-    {
+    for (;;) {
         printf("Enter a positive length: ");
         scanf("%d", &length);
-        if (length > 1){
+        if (length > 1) {
             break;
-        }
-        else{
+        } else {
             printf("You entered length = %d\n\n", length);
         }
     }
 
     int *arr = malloc(sizeof(int) * length);
-    if (arr == NULL)
-    {
+    if (arr == NULL) {
         perror("The following error occurred");
         exit(-1);
     }
 
-    for (int i = 0; i < length; i++){
+    for (int i = 0; i < length; i++) {
         scanf("%d", &arr[i]);
     }
 
     merge_sort(arr, length);
 
-    for (int i = 0; i < length; i++){
+    for (int i = 0; i < length; i++) {
         printf("%d ", arr[i]);
     }
 

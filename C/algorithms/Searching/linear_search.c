@@ -7,8 +7,8 @@ int linear_search(const int arr[], int length, int element)
     Searches for an element in the array arr
     If present returns first index else returns -1
     */
-    for (int i = 0; i < length; i++){
-        if (arr[i] == element){
+    for (int i = 0; i < length; i++) {
+        if (arr[i] == element) {
             return i;
         }
     }
@@ -18,26 +18,24 @@ int linear_search(const int arr[], int length, int element)
 int main()
 {
     int length;
-    for (;;)
-    {
+    for (;;) {
         printf("Enter a positive length: ");
         scanf("%d", &length);
-        if (length > 1){
+
+        if (length > 1) {
             break;
-        }
-        else{
+        } else {
             printf("You entered length = %d\n\n", length);
         }
     }
 
     int *arr = malloc(sizeof(int) * length);
-    if (arr == NULL)
-    {
+    if (arr == NULL) {
         perror("The following error occurred");
         exit(-1);
     }
 
-    for (int i = 0; i < length; i++){
+    for (int i = 0; i < length; i++) {
         scanf("%d", &arr[i]);
     }
 
@@ -47,10 +45,9 @@ int main()
 
     int index = linear_search(arr, length, element);
 
-    if (index == -1){
+    if (index == -1) {
         printf("\nElement not in the array");
-    }
-    else{
+    } else {
         printf("\nIndex of element is %d", index);
     }
 

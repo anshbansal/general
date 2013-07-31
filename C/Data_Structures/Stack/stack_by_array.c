@@ -4,6 +4,7 @@
 
 static const int MAX_SIZE = 100;
 enum action {START, PUSH, POP, TOP, QUIT, END};
+enum status {SUCCESS, FAILURE};
 
 void clear_screen(void)
 {
@@ -13,8 +14,7 @@ void clear_screen(void)
 static enum action get_user_action(void)
 {
     int choice = START;
-    do
-    {
+    do {
         clear_screen();
         printf("%d Push data\n"
                "%d Pop Data\n"
@@ -26,34 +26,31 @@ static enum action get_user_action(void)
     return (enum action) choice;
 }
 
-void push(int *arr, int *length, int *status, int data)
+enum status push(int *arr, int *length, int data)
 {
-    *status = START;
-    if (*length == MAX_SIZE){
-        *status = PUSH;
-        return;
+    if (*length == MAX_SIZE) {
+        return FAILURE;
     }
     arr[(*length)++] = data;
+    return SUCCESS;
 }
 
-int pop(int *arr, int *length, int *status)
+enum status pop(int *arr, int *length, int *data)
 {
-    *status = START;
-    if (*length == 0){
-        *status = POP;
-        return -1;
+    if (*length == 0) {
+        return FAILURE;
     }
-    return arr[--(*length)];
+    *data = arr[--(*length)];
+    return SUCCESS;
 }
 
-int peek(int *arr, int *length, int *status)
+enum status peek(int *arr, int *length, int *data)
 {
-    *status = START;
-    if (*length == 0){
-        *status = POP;
-        return -1;
+    if (*length == 0) {
+        return FAILURE;
     }
-    return arr[*length - 1];
+    *data = arr[*length - 1];
+    return SUCCESS;
 }
 
 int main(void)
@@ -62,49 +59,40 @@ int main(void)
     int length = 0;
 
     enum action choice;
-    while ((choice = get_user_action()) != QUIT)
-    {
+    while ((choice = get_user_action()) != QUIT) {
         clear_screen();
-        int status;
         int data;
-        switch (choice)
-        {
-        case PUSH:
-            printf("Enter data to be pushed -> ");
-            scanf("%d", &data);
-            push(arr, &length, &status, data);
-            if (status == PUSH){
-                printf("Stack overflow\n");
-            }
-            else{
-                printf("%d pushed onto the stack\n", data);
-            }
-            break;
-			
-        case POP:
-            data = pop(arr, &length, &status);
-            if (status == POP){
-                printf("Stack underflow\n");
-            }
-            else{
-                printf("The data is %d\n", data);
-            }
-            break;
-			
-        case TOP:
-            data = peek(arr, &length, &status);
-            switch (status)
-            {
-            case POP:
-                printf("Nothing in the stack\n");
+        switch (choice) {
+
+            case PUSH:
+                printf("Enter data to be pushed -> ");
+                scanf("%d", &data);
+                if (push(arr, &length, data) == SUCCESS) {
+                    printf("%d pushed onto the stack\n", data);
+                } else {
+                    printf("Stack overflow\n");
+                }
                 break;
+
+            case POP:
+                if (pop(arr, &length, &data) == SUCCESS) {
+                    printf("The data is %d\n", data);
+                } else {
+                    printf("Stack underflow\n");
+                }
+                break;
+
+            case TOP:
+                if (peek(arr, &length, &data) == SUCCESS) {
+                    printf("The data at top is %d\n", data);
+                } else {
+                    printf("Nothing in the stack\n");
+                }
+                break;
+
             default:
-                printf("The data at top is %d\n", data);
-            }
-            break;
-			
-        default:
-            assert(!"You should not have reached this.");
+                assert(!"You should not have reached this.");
+
         }
         printf("Length is %d\n", length);
         getchar();

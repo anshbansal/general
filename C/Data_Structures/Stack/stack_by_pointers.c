@@ -3,13 +3,13 @@
 #include <stdlib.h>
 
 enum action {START, PUSH, POP, TOP, QUIT, END};
+enum status {SUCCESS, FAILURE};
 
-typedef struct node
-{
+typedef struct node {
     int data;
     struct node *lower;
 
-}stack_node;
+} stack_node;
 
 void clear_screen(void)
 {
@@ -19,8 +19,7 @@ void clear_screen(void)
 static enum action get_user_action(void)
 {
     int choice = START;
-    do
-    {
+    do {
         clear_screen();
         printf("%d Push data\n"
                "%d Pop Data\n"
@@ -32,51 +31,43 @@ static enum action get_user_action(void)
     return (enum action) choice;
 }
 
-void push(stack_node **top_stack, int *status, int data)
+enum status push(stack_node **top_stack, int data)
 {
-    *status = START;
     stack_node *node = malloc(sizeof(node));
-    if (node == NULL)
-    {
-        *status = PUSH;
-        return;
+    if (node == NULL) {
+        return FAILURE;
     }
 
     node -> data = data;
-    if (*top_stack == NULL){
+    if (*top_stack == NULL) {
         node -> lower = NULL;
-    }
-    else{
+    } else {
         node -> lower = *top_stack;
     }
     *top_stack = node;
+    return SUCCESS;
 }
 
-int pop(stack_node **top_stack, int *status)
+enum status pop(stack_node **top_stack, int *data)
 {
-    *status = START;
-    if (*top_stack == NULL){
-        *status = POP;
-        return -1;
+    if (*top_stack == NULL) {
+        return FAILURE;
     }
-
     stack_node *node = *top_stack;
-    int data = node -> data;
+    *data = node -> data;
     *top_stack = node -> lower;
     free(node);
 
-    return data;
+    return SUCCESS;
 }
 
-int peek(stack_node **top_stack, int *status)
+enum status peek(stack_node **top_stack, int *data)
 {
-    *status = START;
-    if (*top_stack == NULL){
-        *status = POP;
-        return -1;
+    if (*top_stack == NULL) {
+        return FAILURE;
     }
-
-    return (*top_stack) -> data;
+    *data = (*top_stack) -> data;
+    return SUCCESS;
 }
 
 int main(void)
@@ -85,48 +76,40 @@ int main(void)
     int status;
     stack_node *top = NULL;
 
-    while ((choice = get_user_action()) != QUIT)
-    {
+    while ((choice = get_user_action()) != QUIT) {
         clear_screen();
         int data;
-        switch (choice)
-        {
-        case PUSH:
-            printf("Enter data to be pushed -> ");
-            scanf("%d", &data);
-            push(&top, &status, data);
-            if (status == PUSH){
-                printf("Not enough memory\n");
-            }
-            else{
-                printf("%d pushed onto the stack", data);
-            }
-            break;
-			
-        case POP:
-            data = pop(&top, &status);
-            if (status == POP){
-                printf("Stack underflow\n");
-            }
-            else{
-                printf("The data is %d\n", data);
-            }
-            break;
-			
-        case TOP:
-            data = peek(&top, &status);
-            switch (status)
-            {
-            case POP:
-                printf("Nothing in the stack\n");
+        switch (choice) {
+
+            case PUSH:
+                printf("Enter data to be pushed -> ");
+                scanf("%d", &data);
+                if (push(&top, data) == SUCCESS){
+                    printf("%d pushed onto the stack", data);
+                } else {
+                    printf("Not enough memory\n");
+                }
                 break;
+
+            case POP:
+                if (pop(&top, &data) == SUCCESS){
+                    printf("The data is %d\n", data);
+                } else {
+                    printf("Stack underflow\n");
+                }
+                break;
+
+            case TOP:
+                if (peek(&top, &data) == SUCCESS){
+                    printf("The data at top is %d\n", data);
+                } else {
+                    printf("Nothing in the stack\n");
+                }
+                break;
+
             default:
-                printf("The data at top is %d\n", data);
-            }
-            break;
-			
-        default:
-            assert(!"You should not have reached this.");
+                assert(!"You should not have reached this.");
+
         }
         getchar();
         getchar();

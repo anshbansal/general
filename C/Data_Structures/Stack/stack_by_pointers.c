@@ -2,8 +2,14 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-static const int MAX_SIZE = 100;
 enum action {PUSH = 1, POP, TOP, QUIT};
+
+typedef struct node
+{
+    int data;
+    struct node *lower;
+
+}stack_node;
 
 void clear_screen(void)
 {
@@ -12,7 +18,7 @@ void clear_screen(void)
 
 static enum action get_user_action(void)
 {
-    int choice = PUSH - 1;
+    int choice = 0;
     do
     {
         clear_screen();
@@ -26,62 +32,78 @@ static enum action get_user_action(void)
     return (enum action) choice;
 }
 
-void push(int *arr, int *length, int *status, int data)
+void push(stack_node **top_stack, int *status, int data)
 {
     *status = PUSH - 1;
-    if (*length == MAX_SIZE){
+    stack_node *node = malloc(sizeof(node));
+    if (node == NULL)
+    {
         *status = PUSH;
         return;
     }
-    arr[(*length)++] = data;
+
+    node -> data = data;
+    if (*top_stack == NULL){
+        node -> lower = NULL;
+    }
+    else{
+        node -> lower = *top_stack;
+    }
+    *top_stack = node;
 }
 
-int pop(int *arr, int *length, int *status)
+int pop(stack_node **top_stack, int *status)
 {
     *status = PUSH - 1;
-    if (*length == 0){
+    if (*top_stack == NULL){
         *status = POP;
         return -1;
     }
-    return arr[--(*length)];
+
+    stack_node *node = *top_stack;
+    int data = node -> data;
+    *top_stack = node -> lower;
+    free(node);
+
+    return data;
 }
 
-int see_top(int *arr, int *length, int *status)
+int see_top(stack_node **top_stack, int *status)
 {
     *status = PUSH - 1;
-    if (*length == 0){
+    if (*top_stack == NULL){
         *status = POP;
         return -1;
     }
-    return arr[*length - 1];
+
+    return (*top_stack) -> data;
 }
 
 int main(void)
 {
-    int arr[MAX_SIZE];
-    int length = 0;
-
     enum action choice;
+    int status;
+    stack_node *top = NULL;
+
     while ((choice = get_user_action()) != QUIT)
     {
         clear_screen();
-        int status;
         int data;
         switch (choice)
         {
         case PUSH:
             printf("Enter data to be pushed -> ");
             scanf("%d", &data);
-            push(arr, &length, &status, data);
+            push(&top, &status, data);
             if (status == PUSH){
-                printf("Stack overflow\n");
+                printf("Not enough memory\n");
             }
             else{
-                printf("%d pushed onto the stack\n", data);
+                printf("%d pushed onto the stack", data);
             }
             break;
         case POP:
-            data = pop(arr, &length, &status);
+            data = pop(&top, &status);
             if (status == POP){
                 printf("Stack underflow\n");
             }
@@ -90,7 +112,7 @@ int main(void)
             }
             break;
         case TOP:
-            data = see_top(arr, &length, &status);
+            data = see_top(&top, &status);
             switch (status)
             {
             case POP:
@@ -103,7 +125,6 @@ int main(void)
         default:
             assert(!"You should not have reached this.");
         }
-        printf("Length is %d\n", length);
         getchar();
         getchar();
     }

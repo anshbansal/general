@@ -1,9 +1,9 @@
-#include<assert.h>
-#include<stdio.h>
-#include<stdlib.h>
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 static const int MAX_SIZE = 100;
-enum action {PUSH = 1, POP, TOP, QUIT};
+enum action {START, PUSH, POP, TOP, QUIT, END};
 
 void clear_screen(void)
 {
@@ -12,7 +12,7 @@ void clear_screen(void)
 
 static enum action get_user_action(void)
 {
-    int choice = PUSH - 1;
+    int choice = START;
     do
     {
         clear_screen();
@@ -22,13 +22,13 @@ static enum action get_user_action(void)
                "%d Exit\n\n"
                "Enter your choice -> ", PUSH, POP, TOP, QUIT);
         scanf("%d", &choice);
-    } while (choice != PUSH && choice != POP && choice != TOP && choice != QUIT);
+    } while (!(START < choice && choice < END));
     return (enum action) choice;
 }
 
 void push(int *arr, int *length, int *status, int data)
 {
-    *status = PUSH - 1;
+    *status = START;
     if (*length == MAX_SIZE){
         *status = PUSH;
         return;
@@ -38,7 +38,7 @@ void push(int *arr, int *length, int *status, int data)
 
 int pop(int *arr, int *length, int *status)
 {
-    *status = PUSH - 1;
+    *status = START;
     if (*length == 0){
         *status = POP;
         return -1;
@@ -46,9 +46,9 @@ int pop(int *arr, int *length, int *status)
     return arr[--(*length)];
 }
 
-int see_top(int *arr, int *length, int *status)
+int peek(int *arr, int *length, int *status)
 {
-    *status = PUSH - 1;
+    *status = START;
     if (*length == 0){
         *status = POP;
         return -1;
@@ -80,6 +80,7 @@ int main(void)
                 printf("%d pushed onto the stack\n", data);
             }
             break;
+			
         case POP:
             data = pop(arr, &length, &status);
             if (status == POP){
@@ -89,8 +90,9 @@ int main(void)
                 printf("The data is %d\n", data);
             }
             break;
+			
         case TOP:
-            data = see_top(arr, &length, &status);
+            data = peek(arr, &length, &status);
             switch (status)
             {
             case POP:
@@ -100,6 +102,7 @@ int main(void)
                 printf("The data at top is %d\n", data);
             }
             break;
+			
         default:
             assert(!"You should not have reached this.");
         }

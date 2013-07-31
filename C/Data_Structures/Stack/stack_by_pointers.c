@@ -1,8 +1,8 @@
-#include<assert.h>
-#include<stdio.h>
-#include<stdlib.h>
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-enum action {PUSH = 1, POP, TOP, QUIT};
+enum action {START, PUSH, POP, TOP, QUIT, END};
 
 typedef struct node
 {
@@ -18,7 +18,7 @@ void clear_screen(void)
 
 static enum action get_user_action(void)
 {
-    int choice = 0;
+    int choice = START;
     do
     {
         clear_screen();
@@ -28,13 +28,13 @@ static enum action get_user_action(void)
                "%d Exit\n\n"
                "Enter your choice -> ", PUSH, POP, TOP, QUIT);
         scanf("%d", &choice);
-    } while (choice != PUSH && choice != POP && choice != TOP && choice != QUIT);
+    } while (!(START < choice && choice < END));
     return (enum action) choice;
 }
 
 void push(stack_node **top_stack, int *status, int data)
 {
-    *status = PUSH - 1;
+    *status = START;
     stack_node *node = malloc(sizeof(node));
     if (node == NULL)
     {
@@ -54,7 +54,7 @@ void push(stack_node **top_stack, int *status, int data)
 
 int pop(stack_node **top_stack, int *status)
 {
-    *status = PUSH - 1;
+    *status = START;
     if (*top_stack == NULL){
         *status = POP;
         return -1;
@@ -68,9 +68,9 @@ int pop(stack_node **top_stack, int *status)
     return data;
 }
 
-int see_top(stack_node **top_stack, int *status)
+int peek(stack_node **top_stack, int *status)
 {
-    *status = PUSH - 1;
+    *status = START;
     if (*top_stack == NULL){
         *status = POP;
         return -1;
@@ -102,6 +102,7 @@ int main(void)
                 printf("%d pushed onto the stack", data);
             }
             break;
+			
         case POP:
             data = pop(&top, &status);
             if (status == POP){
@@ -111,8 +112,9 @@ int main(void)
                 printf("The data is %d\n", data);
             }
             break;
+			
         case TOP:
-            data = see_top(&top, &status);
+            data = peek(&top, &status);
             switch (status)
             {
             case POP:
@@ -122,6 +124,7 @@ int main(void)
                 printf("The data at top is %d\n", data);
             }
             break;
+			
         default:
             assert(!"You should not have reached this.");
         }

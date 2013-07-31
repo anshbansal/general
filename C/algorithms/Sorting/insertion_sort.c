@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void insertion_sort(int arr[], int length)
 {
@@ -21,7 +21,7 @@ void insertion_sort(int arr[], int length)
 int main()
 {
     int length;
-    while (1)
+    for (;;)
     {
         printf("Enter a positive length: ");
         scanf("%d", &length);

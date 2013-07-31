@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int linear_search(const int arr[], int length, int element)
 {
@@ -18,7 +18,7 @@ int linear_search(const int arr[], int length, int element)
 int main()
 {
     int length;
-    while (1)
+    for (;;)
     {
         printf("Enter a positive length: ");
         scanf("%d", &length);

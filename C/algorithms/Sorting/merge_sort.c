@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 static void merge_parts(int arr[], int length)
 {
@@ -42,7 +42,7 @@ void merge_sort(int arr[], int length)
 int main()
 {
     int length;
-    while (1)
+    for (;;)
     {
         printf("Enter a positive length: ");
         scanf("%d", &length);

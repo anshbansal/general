@@ -1,9 +1,9 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-static int compare (const void * a, const void * b)
+static int compare (const void *a, const void *b)
 {
-    return (*(int*)a - *(int*)b);
+    return (*(int *)a - *(int *)b);
 }
 
 static int bin_proc(const int arr[], int min, int max, int element)
@@ -38,7 +38,7 @@ int bin_search(const int arr[], int length, int element)
 int main()
 {
     int length;
-    while (1)
+    for (;;)
     {
         printf("Enter a positive length: ");
         scanf("%d", &length);

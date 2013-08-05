@@ -3,8 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-enum action {START, PUSH, POP, TOP, LENGTH, QUIT, END};
-enum status {SUCCESS, FAILURE};
+enum status {STACK_SUCCESS, STACK_FAILURE};
 
 typedef struct node {
     void *data;
@@ -15,7 +14,83 @@ typedef struct stack {
     size_t elem_size;
     size_t stack_size;
     stack_node *top;
-} stack_struct;
+} STACK;
+
+enum status stack_init(STACK *stack, size_t elem_size)
+{
+    stack->elem_size = elem_size;
+    stack->stack_size = 0;
+    stack->top = NULL;
+    return STACK_SUCCESS;
+}
+
+stack_node * stack_node_create(STACK *stack)
+{
+    stack_node *node = malloc(sizeof(stack_node));
+    if (node == NULL) {
+        return NULL;
+    }
+    node->data = malloc(stack->elem_size);
+    if (node->data == NULL) {
+        free(node);
+        return NULL;
+    }
+    return node;
+}
+
+enum status stack_push(STACK *stack, void *data)
+{
+    stack_node *node = stack_node_create(stack);
+    if (node == NULL) {
+        return STACK_FAILURE;
+    }
+
+    memcpy(node->data, data, stack->elem_size);
+
+    node->lower = stack->top;
+    stack->top = node;
+    stack->stack_size += 1;
+    return STACK_SUCCESS;
+}
+
+enum status stack_pop(STACK *stack, void *data)
+{
+    if (stack->top == NULL) {
+        return STACK_FAILURE;
+    }
+    stack_node *node = stack->top;
+    memcpy(data, node->data, stack->elem_size);
+    stack->top = node->lower;
+
+    free(node->data);
+    free(node);
+
+    stack->stack_size -= 1;
+    return STACK_SUCCESS;
+}
+
+enum status stack_peek(STACK *stack, void *data)
+{
+    if (stack->top == NULL) {
+        return STACK_FAILURE;
+    }
+    memcpy(data, stack->top->data, stack->elem_size);
+    return STACK_SUCCESS;
+}
+
+void stack_cleanup(STACK *stack)
+{
+    while (stack->top != NULL) {
+        stack_node *node = stack->top;
+        stack->top = stack->top->lower;
+        free(node->data);
+        free(node);
+    }
+}
+
+//Stack Implementation before this.
+//Things that are used to use the stack are placed after this.
+enum action {START, PUSH, POP, TOP, LENGTH, QUIT, END};
 
 void clear_screen(void)
 {
@@ -38,80 +113,11 @@ static enum action get_user_action(void)
     return (enum action) choice;
 }
 
-enum status stack_create(stack_struct **stack, size_t elem_size)
-{
-    (**stack).elem_size = elem_size;
-    (**stack).stack_size = 0;
-    (**stack).top = NULL;
-    return SUCCESS;
-}
-
-enum status push(stack_struct **stack, void *data)
-{
-    stack_node *node = malloc(sizeof(node));
-    if (node == NULL) {
-        return FAILURE;
-    }
-
-    node->data = malloc(sizeof((**stack).elem_size));
-    if (node->data == NULL) {
-        return FAILURE;
-    }
-    memcpy(node->data, data, (**stack).elem_size);
-
-    node->lower = (**stack).top;
-    (**stack).top = node;
-    (**stack).stack_size += 1;
-    return SUCCESS;
-}
-
-enum status pop(stack_struct **stack, void *data)
-{
-    if ((**stack).top == NULL) {
-        return FAILURE;
-    }
-    stack_node *node = (**stack).top;
-    memcpy(data, node->data, (**stack).elem_size);
-    (**stack).top = node->lower;
-
-    free(node->data);
-    free(node);
-
-    (**stack).stack_size -= 1;
-    return SUCCESS;
-}
-
-enum status peek(stack_struct **stack, void *data)
-{
-    if ((**stack).top == NULL) {
-        return FAILURE;
-    }
-    memcpy(data, (**stack).top->data, (**stack).elem_size);
-    return SUCCESS;
-}
-
-void stack_delete(stack_struct **stack)
-{
-    while ((**stack).top != NULL)
-    {
-        stack_node *node = (**stack).top;
-        (**stack).top = (**stack).top->lower;
-        free(node->data);
-        free(node);
-    }
-    free(*stack);
-}
-
 int main(void)
 {
     enum action choice;
-    stack_struct *stack = malloc(sizeof(stack_struct));
-    if (stack == NULL)
-    {
-        printf("Not enough memory\n");
-        return 1;
-    }
-    stack_create(&stack, sizeof(int));
+    STACK stack;
+    stack_init(&stack, sizeof(int));
 
     while ((choice = get_user_action()) != QUIT) {
         clear_screen();
@@ -121,15 +127,15 @@ int main(void)
             case PUSH:
                 printf("Enter data to be pushed -> ");
                 scanf("%d", &data);
-                if (push(&stack, &data) == SUCCESS) {
-                    printf("%d pushed onto the stack\n", *(int *)stack->top->data);
+                if (stack_push(&stack, &data) == STACK_SUCCESS) {
+                    printf("%d pushed onto the stack\n", *(int *)stack.top->data);
                 } else {
                     printf("Not enough memory\n");
                 }
                 break;
 
             case POP:
-                if (pop(&stack, &data) == SUCCESS){
+                if (stack_pop(&stack, &data) == STACK_SUCCESS){
                     printf("The data is %d\n", data);
                 } else {
                     printf("Stack underflow\n");
@@ -137,7 +143,7 @@ int main(void)
                 break;
 
             case TOP:
-                if (peek(&stack, &data) == SUCCESS){
+                if (stack_peek(&stack, &data) == STACK_SUCCESS){
                     printf("The data at top is %d\n", data);
                 } else {
                     printf("Nothing in the stack\n");
@@ -145,7 +151,7 @@ int main(void)
                 break;
 
             case LENGTH:
-                printf("Length is %d\n", stack->stack_size);
+                printf("Length is %d\n", stack.stack_size);
                 break;
 
             default:
@@ -155,5 +161,5 @@ int main(void)
         getchar();
         getchar();
     }
-    stack_delete(&stack);
+    stack_cleanup(&stack);
 }

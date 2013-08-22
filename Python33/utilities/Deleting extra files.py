@@ -29,3 +29,4 @@ def main(startpath):
             os.remove(path + "\\" + name)
     
 main(os.getcwd() + "\\..\\..\\C\\")
+main(os.getcwd() + "\\..\\..\\Cpp\\")

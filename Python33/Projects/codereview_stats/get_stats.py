@@ -2,8 +2,24 @@
 import urllib.request
 import datetime
 
+FILE_NAME = 'data_file.txt'
+CURRENT_URL = 'http://codereview.stackexchange.com/'
+
+def today_date():
+    return datetime.date.today().strftime('%d-%m-%Y')
+
+
+def already_written():
+    with open(FILE_NAME, 'a+') as f:
+        f.seek(0)
+        first_line = f.readline()
+        if today_date() == first_line[:-1]:
+            return True
+        return False
+
 
 def parse(line):
+    """This separates the stat-name and associated number"""
     temp = [0, '']
     braces = False
     for c in line:
@@ -22,24 +38,30 @@ def parse(line):
     return temp
 
 
-def write_stats(filehandle):
-    with open('test.txt', 'a') as f:
-        f.write(datetime.date.today().strftime('%d-%m-%Y')
-                + '\n\n')
+def write_stats():
+    '''This writes the stats into the file'''
+    with open(FILE_NAME, 'r') as f:
+        data = f.readlines()
 
-        for line in filehandle:
+    with open(FILE_NAME, 'w') as f:
+        url_handle = urllib.request.urlopen(CURRENT_URL)
+
+        f.write(today_date() + '\n')
+        f.writelines(data[1:])
+        f.write(today_date() + ',')
+        
+        for line in url_handle:
             temp_line = str(line)[2:-5]
             if 'stats-value' in temp_line and 'label' in temp_line:
                 temp = parse(temp_line)
-                f.write(temp[1] + ' ' + str(temp[0]) + '\n')
+                f.write(str(temp[0]) + ',')
 
         f.write('\n')
 
 
 def main():
-    filehandle = urllib.request.urlopen(
-        'http://codereview.stackexchange.com/')
-    write_stats(filehandle)
-    filehandle.close()
+    if not already_written():
+        write_stats()
 
-main()
+if __name__ == "__main__":
+    main()

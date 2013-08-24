@@ -44,20 +44,19 @@ def write_stats():
         data = f.readlines()
 
     with open(FILE_NAME, 'w') as f:
-        url_handle = urllib.request.urlopen(CURRENT_URL)
-
         f.write(today_date() + '\n')
         f.writelines(data[1:])
-        f.write(today_date() + ',')
-        
+
+        url_handle = urllib.request.urlopen(CURRENT_URL)
+        write_this = today_date() + ','
         for line in url_handle:
             temp_line = str(line)[2:-5]
             if 'stats-value' in temp_line and 'label' in temp_line:
                 temp = parse(temp_line)
-                f.write(str(temp[0]) + ',')
-
-        f.write('\n')
-
+                write_this += str(temp[0]) + ','
+        else:
+            write_this += '\n'
+            f.write(write_this)
 
 def main():
     if not already_written():

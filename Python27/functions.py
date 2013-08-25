@@ -44,37 +44,6 @@ def prime_factors(num):
 
     return ans
 ###
-def largest_prime_factor (num):
-    '''returns the largest prime factor of a number'''
-    if num < 1:
-        return 0
-    ans = 0
-
-    if num % 2 == 0:
-        ans = 2
-        num /= 2
-        while num % 2 == 0:
-            num /= 2
-
-    i = 3
-    while i <= num:
-        if num % i == 0:
-            ans = i
-            num /= i
-            while num % i == 0:
-                num /= i
-
-        i += 2
-
-    return ans
-###
-def reverse_num(num):
-    '''returns the reverse of an integer '''
-    if num < 0:
-        return  - int(str(-num)[::-1])
-    else:
-        return  int(str(num)[::-1])
-###
 def is_palindrome(num):
     '''checks whether a number is palindrome or not'''
     if str(num) != str(num)[::-1]:
@@ -118,25 +87,6 @@ def zeros_in_fact(num):
         num /=  5
         fives += num
     return fives
-###
-def gcd(num1, num2):
-    '''Finding GCD of a number '''
-    '''IMPLEMENTS Euclid's algorithm for finding GCD'''
-    if num1 == 0 or num2 == 0:
-        return 0
-
-    if num1 >= num2:
-        a = num1
-        b = num2
-    else:
-        a = num2
-        b = num1
-
-    while b != 0:
-        c = a % b
-        a,b = b,c
-    else:
-        return a
 ###
 def primes_list(num):
     ''' Returns list of prime numbers'''

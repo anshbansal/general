@@ -1,40 +1,21 @@
 #!python3
-import random
-from timeit import Timer
-from import_from_parent_dir import main
+from help_in_test import tests
 
-REPEAT = 100000
+import import_from_parent_dir
+import_from_parent_dir.main()
 
-def correctness(f):
-    test1 = (f(-34) != -43)
-    test2 = (f(34) != 43)
-    test3 = (f(0) != 0)
-    
-    print("Correctness Test")
-    if test1 or test2 or test3:
-        return False
-    print('Correct')
-    print('-----------')
-    return True
+#The following line needs to be changed
+import reverse_num as cur_module
+list_funcs = [x for x in dir(cur_module)
+              if x.startswith('_') is False]
 
-def timing(f):
-    def test1(f):
-        f(random.randint(1, 1000))
-    def test2(f):
-        f(random.randint(100000, 1000000))
+for i in list_funcs:
+    f = getattr(cur_module, i)
+    #The following tests need to be changed
+    test1 = (f(-34) == -43)
+    test2 = (f(34) == 43)
+    test3 = (f(0) == 0)
+    list_tests = [test1, test2, test3]
 
-    print("Timing Test")
-    print(Timer(lambda: test1(f)).timeit(number = REPEAT))
-    print(Timer(lambda: test2(f)).timeit(number = REPEAT))
-    print('-----------')
-
-def tests(f):
-    print(f.__name__)
-    print('-----------')
-    if correctness(f) is True:
-        timing(f)
-
-if __name__ == "__main__":
-    main()
-    from reverse_num import rev_num
-    tests(rev_num)
+    #The number in following function call needs to be changed
+    tests(f, list_tests, 1)

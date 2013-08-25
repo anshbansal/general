@@ -1,32 +1,19 @@
 #!python3
-import random
-from timeit import Timer
+from help_in_test import tests
+
 import import_from_parent_dir
+import_from_parent_dir.main()
 
-def timing(f, times = 100000):
-    def test1(f):
-        f(random.randint(1, 1000),
-          random.randint(1, 1000))
-    def test2(f):
-        f(random.randint(100000, 1000000),
-          random.randint(100000, 1000000))
+#The following line needs to be changed
+import lcm as cur_module
+list_funcs = [x for x in dir(cur_module)
+              if x.startswith('_') is False]
 
-    print("Timing Test")
-    print(Timer(lambda: test1(f)).timeit(number = times))
-    print(Timer(lambda: test2(f)).timeit(number = times))
-    print('-----------')
+for i in list_funcs:
+    f = getattr(cur_module, i)
+    #The following tests need to be changed
+    test1 = True
+    list_tests = [test1]
 
-def tests(f):
-    print(f.__name__)
-    print('-----------')
-    timing(f)
-
-
-if __name__ == "__main__":
-    import_from_parent_dir.main()
-    import lcm as cur_module
-
-    list_funcs = [x for x in dir(cur_module)
-                  if x.startswith('_') is False]
-    for i in list_funcs:
-        tests(getattr(cur_module, i))
+    #The number in following function call needs to be changed
+    tests(f, list_tests, 2)

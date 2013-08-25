@@ -1,25 +1,4 @@
 import math
-
-###
-def sum_of_series(num):
-    ''' This is the sum of n consecutive natural numbers'''
-    return (  num * (num + 1)  )/2
-###
-def sum_of_squares(num):
-    '''This is the sum of squares of n consecutive natural numbers '''
-    return (  num * (num + 1) * ((2 * num) + 1)  )/6
-###
-def sum_of_cubes(num):
-    '''This is the sum of cubes of n consecutive natural numbers'''
-    return (sum_of_series(num) ** 2)
-###
-def fibonnaci(a, b, n):
-    '''prints fibonnaci series upto n elements'''
-    print a, b,
-    for i in xrange(2, n + 1):
-        a,b = b, a+b
-        print b,      
-###
 def prime_factors(num):
     '''Returns the prime factors of a number'''
     if num < 1:
@@ -43,33 +22,6 @@ def prime_factors(num):
         i += 2
 
     return ans
-###
-def is_palindrome(num):
-    '''checks whether a number is palindrome or not'''
-    if str(num) != str(num)[::-1]:
-        return False
-    else:
-        return True
-###
-def sum_of_digits(num):
-    '''Returns the sum of digits of a number '''
-    total = 0
-    for i in str(num):
-        total += int(i)
-    return total
-###
-def factorial(num):
-    '''Returns factorial of the number '''
-    ans = 1
-    i = 1
-    while i <= num:
-        ans *= i
-        i += 1
-    return ans
-###
-def length_of_num(num):
-    '''Returns the length of the number '''
-    return len(str(num))
 ###
 def circular_shift(num, shift):
     '''Returns a number circularly shifted '''
@@ -178,15 +130,6 @@ def num_of_divisors(num):
             divisors += 2
     
     return divisors
-###
-def pentagonal_num(n):
-    return (n * (3 * n - 1))/2
-###
-def triangle_num(n):
-    return (n * (n + 1))/2
-###
-def hexagonal_num(n):
-    return (n *(2*n - 1))
 ###
 def is_pentagonal_num(n):
     #REQUIRES MATH MODULE

@@ -1,7 +1,8 @@
 #include<stdio.h>
 
 int max_subarray(int array[], int *low, int *high);
-int max_crossing_subarray(int array[], int *low, int mid, int *high);
+
+static int max_crossing_subarray(int array[], int *low, int mid, int *high);
 
 int main()
 {
@@ -55,7 +56,7 @@ int max_subarray(int array[], int *low, int *high)
     }
 }
 
-int max_crossing_subarray(int array[], int *low, int mid, int *high)
+static int max_crossing_subarray(int array[], int *low, int mid, int *high)
 {
     int left_sum = 0;
     int max_left = mid;

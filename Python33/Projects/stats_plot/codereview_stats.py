@@ -40,10 +40,10 @@ def main():
     data, url_handle, today = helper.write_helper(
         FILE_NAME, CURRENT_URL)
 
+    data[0] = today + '\n'
+    data.append(today + ',' + parse(url_handle) + '\n')
     with open(FILE_NAME, 'w') as f:
-        f.write(today + '\n')
-        f.writelines(data[1:])
-        f.write(today + ',' + parse(url_handle) + '\n')
+        f.writelines(data)
 
 if __name__ == "__main__":
     main()

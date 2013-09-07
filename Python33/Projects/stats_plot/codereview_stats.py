@@ -1,7 +1,7 @@
 #! python3
 import helper
 
-FILE_NAME = 'data_file.txt'
+FILE_NAME = 'codereview_stats_file.txt'
 CURRENT_URL = 'http://codereview.stackexchange.com/'
 
 def parse_line(line):
@@ -25,24 +25,25 @@ def parse_line(line):
 
 def parse(url_handle):
     write_this = ''
-    with open(FILE_NAME, 'r') as f:
-        for line in url_handle:
-            temp_line = str(line)[2:-5]
-            if ('stats-value' in temp_line and
-                'label' in temp_line):
-                temp = parse_line(temp_line)
-                write_this += str(temp[0]) + ','
+    for line in url_handle:
+        temp_line = str(line)[2:-5]
+        if ('stats-value' in temp_line and
+            'label' in temp_line):
+            temp = parse_line(temp_line)
+            write_this += str(temp[0]) + ','
     return write_this
 
 def main():
-    if not helper.already_written(FILE_NAME):
-        data, url_handle, today = helper.write_helper(
-            FILE_NAME, CURRENT_URL)
+    if helper.already_written(FILE_NAME):
+        return
 
-        with open(FILE_NAME, 'w') as f:
-            f.write(today + '\n')
-            f.writelines(data[1:])
-            f.write(today + ',' + parse(url_handle) + '\n')
+    data, url_handle, today = helper.write_helper(
+        FILE_NAME, CURRENT_URL)
+
+    with open(FILE_NAME, 'w') as f:
+        f.write(today + '\n')
+        f.writelines(data[1:])
+        f.write(today + ',' + parse(url_handle) + '\n')
 
 if __name__ == "__main__":
     main()

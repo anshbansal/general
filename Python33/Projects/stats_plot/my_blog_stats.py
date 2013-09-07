@@ -15,28 +15,29 @@ def parse_line(line):
     return str(ans)
 
 def parse(url_handle):
-    with open(FILE_NAME, 'r') as f:
-        flags = 0
-        next_line = False
-        for line in url_handle:
-            temp_line = str(line)[2:-5]
-            if next_line == True:
-                return  parse_line(temp_line)
+    flags = 0
+    next_line = False
+    for line in url_handle:
+        temp_line = str(line)[2:-5]
+        if next_line == True:
+            return  parse_line(temp_line)
 
-            if FLAG in temp_line:
-                flags += 1
-                if flags == 3:
-                    next_line = True
+        if FLAG in temp_line:
+            flags += 1
+            if flags == 3:
+                next_line = True
 
 def main():
-    if not helper.already_written(FILE_NAME):
-        data, url_handle, today = helper.write_helper(
-            FILE_NAME, CURRENT_URL)
+    if helper.already_written(FILE_NAME):
+        return
 
-        with open(FILE_NAME, 'w') as f:
-            f.write(today + '\n')
-            f.writelines(data[1:])
-            f.write(today + ',' + parse(url_handle) + '\n')
+    data, url_handle, today = helper.write_helper(
+        FILE_NAME, CURRENT_URL)
+
+    with open(FILE_NAME, 'w') as f:
+        f.write(today + '\n')
+        f.writelines(data[1:])
+        f.write(today + ',' + parse(url_handle) + '\n')
 
 
 if __name__ == "__main__":

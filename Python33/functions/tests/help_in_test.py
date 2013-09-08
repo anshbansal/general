@@ -12,9 +12,7 @@ def correctness(list_tests):
 
 def timing(func, num_args, times = 100000):
     def test(func, a, b):
-        nums = []
-        for i in range(num_args):
-            nums.append(random.randint(a, b))
+        nums = [random.randint(a, b) for i in range(num_args)]
         func(*nums)
 
     print("Timing Test")

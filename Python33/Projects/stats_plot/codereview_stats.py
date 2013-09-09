@@ -1,7 +1,9 @@
 #! python3
 import helper
+import os.path
 
-FILE_NAME = 'codereview_stats_file.txt'
+FILE_NAME = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                         'codereview_stats_file.txt')
 CURRENT_URL = 'http://codereview.stackexchange.com/'
 
 def parse_line(line):
@@ -41,7 +43,7 @@ def main():
         FILE_NAME, CURRENT_URL)
 
     data[0] = today + '\n'
-    data.append(today + ',' + parse(url_handle) + '\n')
+    data.append(today + ',' + parse(url_handle)[:-1] + '\n')
     with open(FILE_NAME, 'w') as f:
         f.writelines(data)
 

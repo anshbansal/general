@@ -17,7 +17,7 @@ for i in list_funcs:
     list_tests = [test1]
 
     #The number in following function call needs to be changed
-    tests(f, list_tests, 1)
+    tests(f, list_tests, num_args = 1)
 
 
     

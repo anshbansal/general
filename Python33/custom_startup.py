@@ -19,7 +19,7 @@ def put_stats():
         input()
 
 def main():
-    time.sleep(15)
+    time.sleep(10)
     put_stats()
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-import random
+from random import randint
 from timeit import Timer
 
 def correctness(list_tests):
@@ -10,14 +10,18 @@ def correctness(list_tests):
     print('-----------')
     return True
 
-def timing(func, num_args, times = 100000):
+def timing(func, num_args):
     def test(func, a, b):
-        nums = [random.randint(a, b) for i in range(num_args)]
+        nums = [randint(a, b) for i in range(num_args)]
         func(*nums)
 
+    ranges = [(1, 100), (100, 10000), (10000, 1000000)]
+
     print("Timing Test")
-    print(Timer(lambda: test(func, 1, 1000)).timeit(number = times))
-    print(Timer(lambda: test(func, 100000, 1000000)).timeit(number = times))
+    for i in ranges:
+        timings = Timer(lambda: test(func, *i)).repeat(6, 10000)
+        min_time = min(timings)
+        print(min_time)
     print('-----------')
 
 def tests(f, list_tests, num_args):

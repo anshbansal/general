@@ -61,21 +61,6 @@ def primes_list(num):
     
     return [2] + filter(lambda x: x, isprime)
 ###
-def is_prime(num):
-    '''Checks whether a number is prime or not'''
-    #REQUIRES MATH MODULE
-    if num == 2:
-        return True
-    elif num % 2 == 0 or num < 2:
-        return False
-    
-    temp = int(round(math.sqrt(num))) + 1
-    for i in xrange(3,temp,2):
-        if num % i == 0:
-            return False
-    else:
-        return True
-###
 def nth_prime(n):
     #REQUIRES primes_list() function
     x = n

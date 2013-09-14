@@ -3,9 +3,8 @@ from timeit import Timer
 
 def correctness(list_tests):
     print("Correctness Test")
-    for i in list_tests:
-        if i is False:
-            return False
+    if not all(list_tests):
+        return False
     print('Correct')
     print('-----------')
     return True

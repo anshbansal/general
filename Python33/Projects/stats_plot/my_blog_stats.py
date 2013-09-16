@@ -1,11 +1,10 @@
 #! python3
 import helper
-import os.path
+import my_blog_constants
 
-FILE_NAME = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                         'my_blog_stats_file.txt')
-CURRENT_URL = 'http://www.alexa.com/search?q=anshbansal.wordpress.com&r=site_screener&p=bigtop'
-FLAG = '/siteinfo/anshbansal.wordpress.com#trafficstats'
+FILE_NAME = my_blog_constants.FILE_NAME
+CURRENT_URL = my_blog_constants.CURRENT_URL
+FLAG = my_blog_constants.FLAG
 
 def parse_line(line):
     """This separates the stat-name and associated number"""

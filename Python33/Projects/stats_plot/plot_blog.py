@@ -6,16 +6,10 @@ from my_blog_constants import FILE_NAME
 
 def get_data():
     with open(FILE_NAME) as f:
-        data = [line for line in f]
+        data = [line.split(',') for line in f]
 
-    data = data[3:]
-    dates = []
-    ranks = []
-    for line in data:
-        date, rank = line.split(',')
-        dates.append(dt.strptime(date, '%d-%m-%Y'))
-        ranks.append(rank)
-
+    dates, ranks = zip(*data[3:])
+    dates = [dt.strptime(line, '%d-%m-%Y') for line in dates]
     return dates, ranks
 
 

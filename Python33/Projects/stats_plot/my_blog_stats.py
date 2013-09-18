@@ -1,10 +1,6 @@
 #! python3
 import helper
-import my_blog_constants
-
-FILE_NAME = my_blog_constants.FILE_NAME
-CURRENT_URL = my_blog_constants.CURRENT_URL
-FLAG = my_blog_constants.FLAG
+from my_blog_constants import FILE_NAME, CURRENT_URL, FLAG
 
 def parse_line(line):
     """This separates the stat-name and associated number"""

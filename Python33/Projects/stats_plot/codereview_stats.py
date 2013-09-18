@@ -1,10 +1,6 @@
 #! python3
 import helper
-import os.path
-
-FILE_NAME = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                         'codereview_stats_file.txt')
-CURRENT_URL = 'http://codereview.stackexchange.com/'
+from codereview_constants import FILE_NAME, CURRENT_URL
 
 def parse_line(line):
     """This separates the stat-name and associated number"""

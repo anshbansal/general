@@ -12,17 +12,10 @@ def parse_line(line):
     return str(ans)
 
 def parse(url_handle):
-    flags = 0
-    next_line = False
     for line in url_handle:
         temp_line = str(line)[2:-5]
-        if next_line == True:
+        if FLAG == temp_line[:10]:
             return parse_line(temp_line)
-
-        if FLAG in temp_line:
-            flags += 1
-            if flags == 3:
-                next_line = True
 
 def main():
     if helper.already_written(FILE_NAME):

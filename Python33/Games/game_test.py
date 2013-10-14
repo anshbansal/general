@@ -11,16 +11,10 @@ def get_image(path):
     image = _image_library.get(path)
     if image  == None:
         canonicalized_path = path.replace('/', os.sep).replace('\\', os.sep)
-        image = pygame.image.load(canonicalized_path)
+        #Using .convert() makes the blit function faster
+        image = pygame.image.load(canonicalized_path).convert()
         _image_library[path] = image
     return image
-
-
-def get_color(color):
-    if color == (255, 100, 0):
-        return (0, 128, 255)
-    else:
-        return (255, 100, 0)
 
 
 def get_positions(x, y, pressed):      
@@ -37,27 +31,28 @@ def get_positions(x, y, pressed):
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((400, 300))
+    screen = pygame.display.set_mode((500, 400))
     clock = pygame.time.Clock()
     
-    x, y, color = 10, 50, (0, 128, 255)
-    width, height = 120, 60
+    x, y, width, height = 10, 50, 120, 60
+    color, alternate = (0, 128, 255), (255, 100, 0)    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                pygame.quit()
                 return
 
             if (event.type == pygame.KEYDOWN and
                    event.key == pygame.K_SPACE):
-                color = get_color(color)
+                color, alternate = alternate, color
 
         pressed = pygame.key.get_pressed()
         x, y = get_positions(x, y, pressed)
 
         screen.fill((0, 0, 0))
-        screen.blit(get_image('images\silvery.png'), (200, 20))
+        screen.blit(get_image('images\silvery.png'), (200, 50))
         pygame.draw.rect(
-            screen, color, pygame.Rect(x, y, 120, 60))
+            screen, color, pygame.Rect(x, y, width, height))
         pygame.display.flip()
         clock.tick(60)
 

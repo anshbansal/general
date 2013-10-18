@@ -61,7 +61,8 @@ class Ball:
         self.y = y
     def setRadius(self, radius):
         self.radius = radius
-    def setColor(self, color):
+    def setColor(
+        self, color):
         self.color = color
     def setSpeed(self, x, y):
         self.speed = [x, y]
@@ -69,3 +70,13 @@ class Ball:
         pygame.draw.circle(surface, self.color,
                            (self.x, self.y), self.radius)
 
+class Boundary:
+    WIDTH = 15
+    COLOR = (128, 128, 128)
+    #Class Initialization
+    def __init__(self, scores_height, screen_width):
+        self.rect = pygame.Rect(
+            0, scores_height - Boundary.WIDTH, screen_width, Boundary.WIDTH)
+    #Main Functions
+    def draw(self, surface):
+        pygame.draw.rect(surface, self.COLOR, self.rect)

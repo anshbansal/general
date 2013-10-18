@@ -1,5 +1,5 @@
 #! python3
-from classes_pong import Paddle, Ball
+from classes_pong import Paddle, Ball, Boundary
 import pygame
 import sys
 from pygame.locals import *
@@ -27,8 +27,10 @@ def get_objects():
     ball = Ball(
         SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] // 2,
         10, WHITE)
+    boundary = Boundary(SCORES_HEIGHT, SCREEN_WIDTH)
+    
+    return player, comp, ball, boundary
 
-    return player, comp, ball
 
 def movement(cur_pad):
     cur_pad.setSpeed(0, 0)
@@ -45,7 +47,7 @@ def main():
     screen = pygame.display.set_mode(SCREEN_SIZE)
     clock = pygame.time.Clock().tick
 
-    player, comp, ball = get_objects()
+    player, comp, ball, boundary = get_objects()
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -54,6 +56,7 @@ def main():
 
 
         screen.fill((0, 0, 0))
+        boundary.draw(screen)
         movement(player)
         player.draw(screen)
         comp.draw(screen)

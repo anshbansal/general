@@ -1,8 +1,6 @@
 #!python3
 from help_in_test import tests
-
 import import_from_parent_dir
-import_from_parent_dir.main()
 
 #The following line needs to be changed
 import lcm as cur_module

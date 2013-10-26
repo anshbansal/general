@@ -1,10 +1,13 @@
 #! python3
-import import_from_parent_dir
+try:
+    import import_from_parent_dir
+except:
+    print("import_from_parent_dir Problem")
+    pass
 import sys
 import subprocess
 import time
 from functions.check_net import internet_on
-
 
 COMMON_PATH = "E:\\Study\\Codes\\Python33\\Projects\\stats_plot"
 SCRIPT1 = COMMON_PATH + "\\codereview_stats.py"

@@ -16,8 +16,5 @@ This repository currently contains Python,C and Java code
 - There are some implementations of standard algorithms and data structures
 - Some solutions to project euler and codechef problems are also present. Be warned these were not optimized and not necessarily following best practices.
 
-####C++
-- NOTHING present so don't look in the Cpp folder
-
 ####Java
 - Contains a generic DAO layer. It has basic functionality. I am looking into ways to refactor it to a better design

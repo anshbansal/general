@@ -1,3 +1,3 @@
 import Functions.Math
 
-prob001 a b = sum [x | x <- a, product ( map (x `rem`) b ) == 0]
+prob001 numList factors = sumOfMultiples numList factors

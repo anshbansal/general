@@ -1,7 +1,9 @@
 module Functions.Math
 (
 factorial,
-quicksort
+isMultipleOfAny,
+quicksort,
+sumOfMultiples
 ) where
 
 
@@ -12,11 +14,19 @@ factorial n
     | otherwise = error "Factorial of this argument not supported"
 
 
+isMultipleOfAny :: (Integral a) => a -> [a] -> Bool
+x `isMultipleOfAny` factors = any (\f -> x `rem` f == 0) factors
+
+
 quicksort :: (Ord a) => [a] -> [a]
 quicksort []      = []
 quicksort (x:xs)  = smaller ++ [x] ++ greater
     where smaller = quicksort (filter (<=x) xs)
           greater = quicksort (filter (>x) xs)
+
+
+sumOfMultiples :: (Integral a) => [a] -> [a] -> a
+sumOfMultiples numList factors = sum $ filter (`isMultipleOfAny` factors) numList
 
 
 lastButOne :: [a] -> Maybe a

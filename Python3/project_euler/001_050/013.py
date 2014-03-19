@@ -5,5 +5,5 @@ def prob_013():
             total += int(line)
         return str(total)[:10]
 
-if __name__== "__main__":
+if __name__ == "__main__":
     print(prob_013())

@@ -1,18 +1,10 @@
-def lcm(num1, num2):
-    '''Returns lcm of 2 numbers'''
-    if not(num1 and num2):
-        return 0
-
-    a, b = (num1, num2) if num1 > num2 else (num2, num1)
-    while b:
-        a, b = b, a % b
-    return (num1 * num2) // a
+from lcm import lcm
 
 
 def prob_005():
     num = 1
-    for i in range(1,21):
-        num = lcm(num,i)
+    for i in range(1, 21):
+        num = lcm(num, i)
     return num
 
 if __name__ == "__main__":

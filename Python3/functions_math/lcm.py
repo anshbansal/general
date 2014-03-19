@@ -1,5 +1,8 @@
+__author__ = 'Aseem'
+
+
 def lcm(num1, num2):
-    '''Finding LCM of a number '''
+    """Finding LCM of a number"""
     '''Uses Euclid's algorithm for finding GCD'''
     if not(num1 and num2):
         return 0

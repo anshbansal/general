@@ -1,5 +1,6 @@
 from itertools import count
 
+
 def prob_025():
     a, b, digits = 1, 1, 1
     for number in count(2):

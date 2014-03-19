@@ -1,12 +1,15 @@
 import math
+
+
 def is_triangle_num(n):
     temp = (-1 + math.sqrt(8 * n + 1))/2
     if temp == int(temp):
         return True
     return False
 
+
 def prob_042():
-    with open('042.txt') as f:
+    with open('Resources\\042.txt') as f:
         words = f.readline().split(',')
 
     triangles = 0

@@ -1,18 +1,6 @@
-import math
 from itertools import permutations
+from primes import is_prime
 
-def is_prime(num):
-    '''Checks whether a number is prime or not'''
-    if num == 2:
-        return True
-    if num % 2 == 0:
-        return False
-    
-    temp = int(round(math.sqrt(num))) + 1
-    for i in range(3,temp,2):
-        if not(num % i):
-            return False
-    return True
 
 def prob_041():
     largest = 0

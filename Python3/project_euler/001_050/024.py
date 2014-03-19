@@ -1,5 +1,6 @@
 from itertools import permutations as p
 
+
 def prob_024():
     j = 0
     for i in p('0123456789'):

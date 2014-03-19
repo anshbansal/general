@@ -1,15 +1,9 @@
-import math
 from itertools import count
+from primes import is_prime
 
-def is_prime(num):
-    temp = int(round(math.sqrt(num))) + 1
-    for i in range(3,temp,2):
-        if num % i == 0:
-            return False
-    return True
 
 def prob_046():
-    for i in count(9,2):
+    for i in count(9, 2):
         if is_prime(i):
             continue
         for j in count(1):
@@ -21,6 +15,3 @@ def prob_046():
 
 if __name__ == "__main__":
     print(prob_046())
-
-
-        

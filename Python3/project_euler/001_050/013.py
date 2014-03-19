@@ -1,5 +1,5 @@
 def prob_013():
-    with open('013.txt') as f:
+    with open('Resources\\013.txt') as f:
         total = 0
         for line in f:
             total += int(line)

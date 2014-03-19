@@ -1,6 +1,7 @@
 from math import sqrt
 from itertools import count
 
+
 def prob_045():
     for i in count(286):
         tri_num = (i * (i + 1))//2

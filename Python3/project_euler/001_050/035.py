@@ -1,15 +1,11 @@
-import math
-def is_prime(num):
-    temp = int(round(math.sqrt(num))) + 1
-    for i in range(3,temp,2):
-        if num % i == 0:
-            return False
-    return True
+from primes import is_prime
+
 
 def circular_shift(num, shift):
     num = str(num)
     length = len(num)
-    return int(num[length - shift:] + num [:length - shift])
+    return int(num[length - shift:] + num[:length - shift])
+
 
 def is_circular_prime(num, length):
     for i in str(num):
@@ -19,6 +15,7 @@ def is_circular_prime(num, length):
         if not is_prime(circular_shift(num, check + 1)):
             return False
     return True
+
 
 def prob_035():
     return(4 + sum(is_circular_prime(i, len(str(i)))

@@ -5,6 +5,7 @@ NUMS = {
     18 : 8, 19 : 8
     }
 
+
 def numeral_to_string(num):
     ans = 0
     if num > 999:
@@ -37,6 +38,7 @@ def numeral_to_string(num):
 
     #NUMS[num] for num < 20
     return (ans + NUMS[num])
+
 
 def prob_017():
     return sum(numeral_to_string(i) for i in range(1,1001))

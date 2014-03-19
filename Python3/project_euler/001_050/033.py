@@ -1,9 +1,10 @@
 from fractions import Fraction as f
 from itertools import product
 
+
 def prob_033():
-    ans = f(1,1)
-    for num, den in product(range(10,100), repeat = 2):
+    ans = f(1, 1)
+    for num, den in product(range(10, 100), repeat = 2):
         if num >= den:
             continue
 

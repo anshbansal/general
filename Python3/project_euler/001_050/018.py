@@ -1,5 +1,5 @@
 def prob_018():
-    with open('018.txt') as f:
+    with open('Resources\\018.txt') as f:
         mat = [[int(i) for i in line[:-1].split(' ')]
                for line in f]
     for row_num in range(1, len(mat)):

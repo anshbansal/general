@@ -29,6 +29,16 @@ def largest_prime_factor(num):
     return ans if num == 1 else num
 
 
+def nth_prime(num):
+    """"Returns the Nth prime"""
+    pos = num
+    fun = primes_list(pos)
+    while len(fun) < num:
+        pos *= 2
+        fun = primes_list(pos)
+    return fun[num - 1]
+
+
 def primes_list(num):
     """Returns list of prime numbers"""
     if num < 2:

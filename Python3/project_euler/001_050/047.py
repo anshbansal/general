@@ -1,8 +1,9 @@
 from itertools import chain, count
 import math
 
+
 def num_distinct_prime_factors(num):
-    '''returns the num of distinct prime factors for num > 0'''
+    """returns the num of distinct prime factors for num > 0"""
     ans = 0
     sqrt_num = math.floor(math.sqrt(num)) + 1
     for i in chain([2], range(3, sqrt_num, 2)):
@@ -12,6 +13,7 @@ def num_distinct_prime_factors(num):
         while not (num % i):
             num //= i
     return ans if num == 1 else ans + 1
+
 
 def prob_047():
     nums = 0

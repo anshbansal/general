@@ -1,5 +1,5 @@
 def prob_022():
-    with open('022.txt') as f:
+    with open('Resources\\022.txt') as f:
         names = f.readline().split(',')
         names.sort()
 

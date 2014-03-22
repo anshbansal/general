@@ -3,6 +3,7 @@ __author__ = 'Aseem'
 import combinatorics
 import files
 import lcm
+import numbers
 import primes
 import series
 
@@ -16,7 +17,8 @@ def prob_0001():
 
 def prob_0002():
     a, b, limit = 1, 2, 4000000
-    total = a + sum(b for b in series.fibonacci(a, b, limit) if b % 2 == 0)
+    total = a + sum(b for b in series.fibonacci(a, b, limit)
+                    if b % 2 == 0)
     return total
 
 
@@ -30,8 +32,8 @@ def prob_0004():
     for i in range(100, 1000):
         for j in range(i + 1, 1000):
             num = i * j
-            if num > largest and num == int(str(num)[::-1]):
-                    largest = num
+            if num > largest and numbers.is_palindrome(num):
+                largest = num
     return largest
 
 
@@ -67,7 +69,7 @@ def prob_0009():
     for c in range(1, 997):
         for b in range(1, c):
             a = 1000 - b - c
-            if b > a > 0 and a*a + b*b == c*c:
+            if b > a > 0 and a * a + b * b == c * c:
                 return a * b * c
 
 
@@ -86,12 +88,31 @@ def prob_0015():
 
 
 def prob_0016():
-    #TODO Can be refactored into reusable
     num = str(2 ** 1000)
     return sum(int(i) for i in num)
 
+
+def prob_0022():
+    for line in files.get_lines(RESOURCES, '022.txt'):
+        names = line.split(',')
+        names.sort()
+
+        scores = 0
+        for i in range(len(names)):
+            score = 0
+            for c in names[i][1:-1]:
+                score += ord(c) - ord('A') + 1
+            scores += (score * (i + 1))
+        return scores
+
+
+def prob_0048():
+    return str(sum(i ** i for i in range(1, 1001)))[-10:]
+
+
 if __name__ == "__main__":
     import sys
+
     RULER = "====="
     LIST_FUNC = [i for i in dir(sys.modules[__name__])
                  if i.startswith('prob_') is True]

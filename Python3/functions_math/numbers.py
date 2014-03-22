@@ -6,3 +6,7 @@ def rev_num(num):
         return -int(str(-num)[::-1])
     else:
         return int(str(num)[::-1])
+
+
+def is_palindrome(num):
+    return num == rev_num(num)

@@ -1,6 +1,13 @@
 __author__ = 'Aseem'
 
 
+def fibonacci(a, b, num):
+    """Lazily generates Fibonacci numbers"""
+    while b < num:
+        yield b
+        a, b = b, a + b
+
+
 def sum_numbers(num):
     return (num * (num + 1))//2
 

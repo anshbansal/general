@@ -1,36 +1,26 @@
 __author__ = 'Aseem'
 
-from lcm import lcm_of_range
-from primes import largest_prime_factor, nth_prime, primes_list
-from series import sum_numbers, sum_squares, sum_multiples_upto
+import combinatorics
+import lcm
+import primes
+import series
 
 
 def prob_0001():
-    print(sum_multiples_upto((3, 5), 1000))
-
-
-def aux_0002(num):
-    #TODO Refactor
-    """Returns the sum of even fibonacci numbers below num"""
-    a, b = 1, 2
-    total = 0
-    while b < num:
-        if b % 2 == 0:
-            total += b
-        a, b = b, a + b
-
-    return total
+    return series.sum_multiples_upto((3, 5), 1000)
 
 
 def prob_0002():
-    print(aux_0002(4000000))
+    a, b, limit = 1, 2, 4000000
+    total = a + sum(b for b in series.fibonacci(a, b, limit) if b % 2 == 0)
+    return total
 
 
 def prob_0003():
-    print(largest_prime_factor(600851475143))
+    return primes.largest_prime_factor(600851475143)
 
 
-def aux_0004():
+def prob_0004():
     #TODO Refactor
     largest = 0
     for i in range(100, 1000):
@@ -41,23 +31,19 @@ def aux_0004():
     return largest
 
 
-def prob_0004():
-    print(aux_0004())
-
-
 def prob_0005():
-    print(lcm_of_range(1, 21))
+    return lcm.lcm_of_range(1, 21)
 
 
 def prob_0006():
-    print(sum_numbers(100) ** 2 - sum_squares(100))
+    return series.sum_numbers(100) ** 2 - series.sum_squares(100)
 
 
 def prob_0007():
-    print(nth_prime(10001))
+    return primes.nth_prime(10001)
 
 
-def aux_0008():
+def prob_0008():
     #TODO Refactor
     with open('Resources\\008.txt') as f:
         number = ''
@@ -74,22 +60,34 @@ def aux_0008():
     return largest
 
 
-def prob_0008():
-    print(aux_0008())
-
-
 def prob_0009():
     for c in range(1, 997):
         for b in range(1, c):
             a = 1000 - b - c
             if b > a > 0 and a*a + b*b == c*c:
-                print(a * b * c)
-                return
+                return a * b * c
 
 
 def prob_0010():
-    print(sum(primes_list(2000000)))
+    return sum(primes.primes_list(2000000))
 
+
+def prob_0013():
+    with open('Resources\\013.txt') as f:
+        total = 0
+        for line in f:
+            total += int(line)
+        return str(total)[:10]
+
+
+def prob_0015():
+    return combinatorics.combinations(40, 20)
+
+
+def prob_0016():
+    #TODO Can be refactored into reusable
+    num = str(2 ** 1000)
+    return sum(int(i) for i in num)
 
 if __name__ == "__main__":
     import sys
@@ -98,4 +96,4 @@ if __name__ == "__main__":
                  if i.startswith('prob_') is True]
     for fname in LIST_FUNC:
         print(fname + RULER, end="")
-        locals()[fname]()
+        print(locals()[fname]())

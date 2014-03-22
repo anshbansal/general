@@ -1,9 +1,9 @@
 NUMS = {
-    0 : 0, #This value makes one condition less
-    1 : 3, 2 : 3, 3 : 5, 4 : 4, 5 : 4, 6 : 3, 7 : 5, 8 : 5, 9 : 4,
-    10 : 3, 11 : 6, 12 : 6, 13 : 8, 14 : 8, 15 : 7, 16 : 7, 17 : 9,
-    18 : 8, 19 : 8
-    }
+    0: 0,  #This value makes one condition less
+    1: 3, 2: 3, 3: 5, 4: 4, 5: 4, 6: 3, 7: 5, 8: 5, 9: 4,
+    10: 3, 11: 6, 12: 6, 13: 8, 14: 8, 15: 7, 16: 7, 17: 9,
+    18: 8, 19: 8
+}
 
 
 def numeral_to_string(num):
@@ -13,13 +13,13 @@ def numeral_to_string(num):
         num %= 1000
 
     if num > 99:
-        temp = num//100
+        temp = num // 100
         ans += NUMS[temp]
         if num % 100:
             ans += len("hundredand")
         else:
             ans += len("hundred")
-            
+
         num %= 100
 
     if num > 19:
@@ -41,7 +41,8 @@ def numeral_to_string(num):
 
 
 def prob_017():
-    return sum(numeral_to_string(i) for i in range(1,1001))
+    return sum(numeral_to_string(i) for i in range(1, 1001))
+
 
 if __name__ == "__main__":
     print(prob_017())

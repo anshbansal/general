@@ -1,9 +1,13 @@
 __author__ = 'Aseem'
 
 import combinatorics
+import files
 import lcm
 import primes
 import series
+
+
+RESOURCES = 'Resources'
 
 
 def prob_0001():
@@ -45,10 +49,9 @@ def prob_0007():
 
 def prob_0008():
     #TODO Refactor
-    with open('Resources\\008.txt') as f:
-        number = ''
-        for line in f:
-            number += line[:-1]
+    number = ''
+    for line in files.get_lines(RESOURCES, '008.txt'):
+        number += line
 
     largest = 0
     for i in range(995):
@@ -73,11 +76,9 @@ def prob_0010():
 
 
 def prob_0013():
-    with open('Resources\\013.txt') as f:
-        total = 0
-        for line in f:
-            total += int(line)
-        return str(total)[:10]
+    total = sum(int(line)
+                for line in files.get_lines(RESOURCES, '013.txt'))
+    return str(total)[:10]
 
 
 def prob_0015():

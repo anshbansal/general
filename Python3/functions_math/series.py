@@ -9,11 +9,11 @@ def fibonacci(a, b, num):
 
 
 def sum_numbers(num):
-    return (num * (num + 1))//2
+    return (num * (num + 1)) // 2
 
 
 def sum_squares(num):
-    return (num * (num + 1) * (2 * num + 1))//6
+    return (num * (num + 1) * (2 * num + 1)) // 6
 
 
 def sum_multiples_upto(nums, upto):

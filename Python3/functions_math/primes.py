@@ -47,11 +47,11 @@ def primes_list(num):
     isprime = [num for num in range(3, num + 1, 2)]
     temp2 = int(math.sqrt(num)) + 1
     for i in range(3, temp2, 2):
-        if isprime[(i-3)//2]:
+        if isprime[(i - 3) // 2]:
             j = 3
             temp = j * i
             while temp <= num:
-                isprime[(temp-3)//2] = 0
+                isprime[(temp - 3) // 2] = 0
                 j += 2
                 temp = j * i
 

@@ -6,29 +6,28 @@ import lcm
 import numbers
 import primes
 import series
-import itertools
+from itertools import count
 
 
 RESOURCES = 'Resources'
 
 
-def prob_0001():
+def prob_001():
     return series.sum_multiples_upto((3, 5), 1000)
 
 
-def prob_0002():
+def prob_002():
     a, b, limit = 1, 2, 4000000
     total = a + sum(b for b in series.fibonacci(a, b, limit)
                     if b % 2 == 0)
     return total
 
 
-def prob_0003():
+def prob_003():
     return primes.largest_prime_factor(600851475143)
 
 
-def prob_0004():
-    #TODO Refactor
+def prob_004():
     largest = 0
     for i in range(100, 1000):
         for j in range(i + 1, 1000):
@@ -38,20 +37,19 @@ def prob_0004():
     return largest
 
 
-def prob_0005():
+def prob_005():
     return lcm.lcm_of_range(1, 21)
 
 
-def prob_0006():
+def prob_006():
     return series.sum_numbers(100) ** 2 - series.sum_squares(100)
 
 
-def prob_0007():
+def prob_007():
     return primes.nth_prime(10001)
 
 
-def prob_0008():
-    #TODO Refactor
+def prob_008():
     number = ''
     for line in files.get_lines(RESOURCES, '008.txt'):
         number += line
@@ -66,7 +64,7 @@ def prob_0008():
     return largest
 
 
-def prob_0009():
+def prob_009():
     for c in range(1, 997):
         c_square = c * c
         for b in range(1, c):
@@ -75,26 +73,27 @@ def prob_0009():
                 return a * b * c
 
 
-def prob_0010():
+def prob_010():
+    #TODO May be Optimized - Level 1 of 3
     return sum(primes.primes_list(2000000))
 
 
-def prob_0013():
+def prob_013():
     total = sum(int(line)
                 for line in files.get_lines(RESOURCES, '013.txt'))
     return str(total)[:10]
 
 
-def prob_0015():
+def prob_015():
     return combinatorics.combinations(40, 20)
 
 
-def prob_0016():
+def prob_016():
     num = str(2 ** 1000)
     return sum(int(i) for i in num)
 
 
-def prob_0022():
+def prob_022():
     for line in files.get_lines(RESOURCES, '022.txt'):
         names = line.split(',')
         names.sort()
@@ -108,9 +107,31 @@ def prob_0022():
         return scores
 
 
-def prob_0047():
+def prob_045():
+    for i in count(286):
+        tri_num = numbers.triangle_num(i)
+
+        if numbers.is_pentagonal_num(tri_num) and numbers.is_hexagonal_num(tri_num):
+            return tri_num
+
+
+def prob_046():
+    #TODO Refactor
+    for i in count(9, 2):
+        if primes.is_prime(i):
+            continue
+        for j in count(1):
+            temp = i - 2 * j ** 2
+            if temp < 0:
+                return i
+            if primes.is_prime(temp):
+                break
+
+
+def prob_047():
+    #TODO May be Optimized - Level 1 of 3
     nums = 0
-    for i in itertools.count(1):
+    for i in count(1):
         if primes.num_distinct_prime_factors(i) == 4:
             nums += 1
             if nums == 4:
@@ -119,7 +140,7 @@ def prob_0047():
             nums = 0
 
 
-def prob_0048():
+def prob_048():
     return str(sum(i ** i for i in range(1, 1001)))[-10:]
 
 

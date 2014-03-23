@@ -2,6 +2,7 @@
 import math
 
 def prob_206():
+    #TODO Can be optimized
     #num1 = int(math.sqrt(10203040506070809))
     num2 = int(math.sqrt(19293949596979899))
     #print(num1, num2)

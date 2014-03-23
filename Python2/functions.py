@@ -40,15 +40,6 @@ def zeros_in_fact(num):
         fives += num
     return fives
 ###
-def nth_prime(n):
-    #REQUIRES primes_list() function
-    x = n
-    fun = primes_list(x)
-    while len(fun) < n:
-        x *= 2
-        fun = primes_list(x)
-    return fun[n - 1]
-###
 def sum_primes(num):
     '''Returns the sum of primes upto num(inclusive)'''
     #REQUIRES primes_list() function
@@ -94,30 +85,6 @@ def num_of_divisors(num):
             divisors += 2
     
     return divisors
-###
-def is_pentagonal_num(n):
-    #REQUIRES MATH MODULE
-    temp = (1 + math.sqrt(1 + 24 * n))//6
-    if temp == int(temp):
-        return True
-    else:
-        return False
-###
-def is_triangle_num(n):
-    #REQUIRES MATH MODULE
-    temp = (-1 + math.sqrt(8 * n + 1))//2
-    if temp == int(temp):
-        return True
-    else:
-        return False
-###
-def is_hexagonal_num(n):
-    #REQUIRES MATH MODULE
-    temp = (1 + math.sqrt(1 + 8 * n))//4
-    if temp == int(temp):
-        return True
-    else:
-        return False
 ###
 def is_bouncy_num(num):
     lisst1 = [int(i) for i in str(num)]

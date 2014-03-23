@@ -15,6 +15,7 @@ def is_prime(num):
     return True
 
 def prob_058():
+    #TODO Can be optimized
     primes = 0
     non_primes = 1
     for n in count(3, 2):

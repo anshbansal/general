@@ -3,10 +3,11 @@ __author__ = 'Aseem'
 import combinatorics
 import files
 import lcm
+import math
 import numbers
 import primes
 import series
-from itertools import count
+from itertools import count, permutations
 
 
 RESOURCES = 'Resources'
@@ -93,6 +94,10 @@ def prob_016():
     return sum(int(i) for i in num)
 
 
+def prob_020():
+    return sum(int(i) for i in str(math.factorial(100)))
+
+
 def prob_022():
     for line in files.get_lines(RESOURCES, '022.txt'):
         names = line.split(',')
@@ -105,6 +110,55 @@ def prob_022():
                 score += ord(c) - ord('A') + 1
             scores += (score * (i + 1))
         return scores
+
+
+def prob_029():
+    return len({pow(a, b)
+                for a in range(2, 101)
+                for b in range(2, 101)}
+               )
+
+
+def prob_040():
+    s = ''
+    for i in count(1):
+        s += str(i)
+        if len(s) >= 1000000:
+            break
+
+    total = 1
+    for i in range(7):
+        total *= int(s[10 ** i - 1])
+
+    return total
+
+
+def prob_041():
+    largest = 0
+    for i in range(1, 9):
+        for j in permutations(range(1, i + 1)):
+            temp = 0
+            for c in j:
+                temp *= 10
+                temp += c
+            if temp > largest and primes.is_prime(temp):
+                largest = temp
+
+    return largest
+
+
+def prob_042():
+    with open('Resources\\042.txt') as f:
+        words = f.readline().split(',')
+
+    triangles = 0
+    for word in words:
+        value = sum((ord(c) - ord('A') + 1)
+                    for c in word[1:-1])
+        if numbers.is_triangle_num(value):
+            triangles += 1
+
+    return triangles
 
 
 def prob_045():

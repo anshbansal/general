@@ -50,3 +50,11 @@ def is_hexagonal_num(n):
     if temp == int(temp):
         return True
     return False
+
+
+def factorial(num):
+    ans = 1
+    while num > 1:
+        ans *= num
+        num -= 1
+    return ans

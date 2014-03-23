@@ -56,3 +56,18 @@ def primes_list(num):
                 temp = j * i
 
     return [2] + [x for x in isprime if x]
+
+
+def num_distinct_prime_factors(num):
+    """returns the num of distinct prime factors for num > 0"""
+    ans = 0
+    sqrt_num = math.floor(math.sqrt(num)) + 1
+    for i in itertools.chain([2], range(3, sqrt_num, 2)):
+        if num % i:
+            continue
+
+        while num % i == 0:
+            num //= i
+        else:
+            ans += 1
+    return ans if num == 1 else ans + 1

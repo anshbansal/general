@@ -10,3 +10,7 @@ def rev_num(num):
 
 def is_palindrome(num):
     return num == rev_num(num)
+
+
+def get_binary(num):
+    return int(bin(num)[2:])

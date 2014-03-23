@@ -6,6 +6,7 @@ import lcm
 import numbers
 import primes
 import series
+import itertools
 
 
 RESOURCES = 'Resources'
@@ -67,9 +68,10 @@ def prob_0008():
 
 def prob_0009():
     for c in range(1, 997):
+        c_square = c * c
         for b in range(1, c):
             a = 1000 - b - c
-            if b > a > 0 and a * a + b * b == c * c:
+            if a * a + b * b == c_square and b > a > 0:
                 return a * b * c
 
 
@@ -104,6 +106,17 @@ def prob_0022():
                 score += ord(c) - ord('A') + 1
             scores += (score * (i + 1))
         return scores
+
+
+def prob_0047():
+    nums = 0
+    for i in itertools.count(1):
+        if primes.num_distinct_prime_factors(i) == 4:
+            nums += 1
+            if nums == 4:
+                return i - 3
+        else:
+            nums = 0
 
 
 def prob_0048():

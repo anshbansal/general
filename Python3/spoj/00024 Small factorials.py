@@ -4,6 +4,6 @@ def p():
     numbers = int(next(sys.stdin))
     nums = [int(i) for i in islice(sys.stdin,numbers)]
     for i in nums:
-        print math.factorial(i)
+        print(math.factorial(i))
 
 p()

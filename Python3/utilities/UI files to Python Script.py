@@ -1,3 +1,4 @@
+#TODO Placed in Python3 without running. Don't have Qt installed
 #Convert .ui files created by QtCreator to .py files
 #The .py files are for use with PySide
 

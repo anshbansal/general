@@ -2,8 +2,10 @@ import sys
 
 def p():
     tests = int(next(sys.stdin))
-    for test in xrange(tests):
+    for test in range(tests):
         a = sum(map(lambda x: int(x[::-1]), next(sys.stdin).split()))
-        print str(a)[::-1]
+        while a % 10 == 0:
+            a //= 10
+        print(str(a)[::-1])
         
 p()

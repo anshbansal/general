@@ -15,7 +15,7 @@ def p():
             else:
                 ans.append(c)
         
-        print ''.join(ans)
+        print(''.join(ans))
                 
 p()
         

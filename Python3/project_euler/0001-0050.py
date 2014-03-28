@@ -94,6 +94,27 @@ def prob_016():
     return sum(int(i) for i in num)
 
 
+def prob_018():
+    mat = [[int(i) for i in line.split(' ')]
+           for line in files.get_lines(RESOURCES, "018.txt")]
+    for row_num in range(1, len(mat)):
+        pre = mat[row_num - 1]
+        cur = mat[row_num]
+
+        for el_num in range(len(cur)):
+            total = cur[el_num]
+            if el_num == 0:
+                total += pre[el_num]
+            elif el_num == len(cur) - 1:
+                total += pre[el_num - 1]
+            else:
+                total += pre[el_num - 1] if pre[el_num - 1] > pre[el_num] \
+                    else pre[el_num]
+
+            mat[row_num][el_num] = total
+    return max(mat[len(mat) - 1])
+
+
 def prob_020():
     return sum(int(i) for i in str(math.factorial(100)))
 
@@ -103,13 +124,13 @@ def prob_022():
         names = line.split(',')
         names.sort()
 
-        scores = 0
-        for i in range(len(names)):
-            score = 0
-            for c in names[i][1:-1]:
-                score += ord(c) - ord('A') + 1
-            scores += (score * (i + 1))
-        return scores
+    scores = 0
+    for i in range(len(names)):
+        score = 0
+        for c in names[i][1:-1]:
+            score += ord(c) - ord('A') + 1
+        scores += (score * (i + 1))
+    return scores
 
 
 def prob_029():
@@ -148,8 +169,8 @@ def prob_041():
 
 
 def prob_042():
-    with open('Resources\\042.txt') as f:
-        words = f.readline().split(',')
+    for line in files.get_lines(RESOURCES, "042.txt"):
+        words = line.split(",")
 
     triangles = 0
     for word in words:

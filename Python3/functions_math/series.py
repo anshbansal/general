@@ -14,16 +14,11 @@ def collatz(num):
         yield num
 
 
-def fibonacci_inf(a, b):
-    """Lazily generates Fibonacci numbers Infinitely"""
-    while True:
-        yield b
-        a, b = b, a + b
-
-
-def fibonacci(a, b, num):
+def fibonacci(a, b, limit=None):
+    #TODO Refactor
     """Lazily generates Fibonacci numbers"""
-    while b < num:
+    loop_indefinitely = limit is None
+    while loop_indefinitely or b < limit:
         yield b
         a, b = b, a + b
 

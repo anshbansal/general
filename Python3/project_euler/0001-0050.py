@@ -1,6 +1,7 @@
 __author__ = 'Aseem'
 
 import algos
+import common
 import combinatorics
 import files
 import lcm
@@ -95,25 +96,7 @@ def prob_016():
 
 
 def prob_018():
-    #TODO Refactor
-    matrix = [[int(i) for i in line.split(' ')]
-              for line in files.get_lines(RESOURCES, "018.txt")]
-    for row_num in range(1, len(matrix)):
-        pre = matrix[row_num - 1]
-        cur = matrix[row_num]
-
-        for el_num in range(len(cur)):
-            total = cur[el_num]
-            if el_num == 0:
-                total += pre[el_num]
-            elif el_num == len(cur) - 1:
-                total += pre[el_num - 1]
-            else:
-                total += pre[el_num - 1] if pre[el_num - 1] > pre[el_num] \
-                    else pre[el_num]
-
-            matrix[row_num][el_num] = total
-    return max(matrix[len(matrix) - 1])
+    return common.max_path_sum_tri_file(RESOURCES, "018.txt")
 
 
 def prob_019():
@@ -148,7 +131,7 @@ def prob_022():
 
 
 def prob_025():
-    for b, i in zip(series.fibonacci_inf(1, 1), count(2)):
+    for b, i in zip(series.fibonacci(1, 1), count(2)):
         if len(str(b)) > 999:
             return i
 

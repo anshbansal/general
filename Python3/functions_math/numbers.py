@@ -12,7 +12,10 @@ def rev_num(num):
 
 
 def is_palindrome(num):
-    return num == rev_num(num)
+    if isinstance(num, str):
+        return num == num[::-1]
+    else:
+        return num == rev_num(num)
 
 
 def get_binary(num):
@@ -65,3 +68,9 @@ def product_digits(str_num):
     for i in str_num:
         product *= int(i)
     return product
+
+
+def circular_shift(num, shift=1):
+    num = str(num)
+    length = len(num)
+    return int(num[length - shift:] + num[:length - shift])

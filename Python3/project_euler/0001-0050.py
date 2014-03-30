@@ -160,6 +160,16 @@ def prob_029():
                )
 
 
+def prob_035():
+    return(4 + sum(primes.is_circular_prime(i, len(str(i)))
+                   for i in range(11, 1000000, 2)))
+
+
+def prob_036():
+    return sum(i for i in range(1, 1000000)
+               if numbers.is_palindrome(str(i)) and numbers.is_palindrome(bin(i)[2:]))
+
+
 def prob_040():
     s = ''
     for i in count(1):

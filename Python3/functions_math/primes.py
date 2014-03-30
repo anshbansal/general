@@ -2,6 +2,7 @@ __author__ = 'Aseem'
 
 import itertools
 import math
+import numbers
 
 
 def is_prime(num):
@@ -71,3 +72,13 @@ def num_distinct_prime_factors(num):
         else:
             ans += 1
     return ans if num == 1 else ans + 1
+
+
+def is_circular_prime(num, length):
+    for i in str(num):
+        if not(int(i) % 2):
+            return False
+    for check in range(length):
+        if not is_prime(numbers.circular_shift(num, check + 1)):
+            return False
+    return True

@@ -58,3 +58,10 @@ def factorial(num):
         ans *= num
         num -= 1
     return ans
+
+
+def product_digits(str_num):
+    product = 1
+    for i in str_num:
+        product *= int(i)
+    return product

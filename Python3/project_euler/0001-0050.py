@@ -1,5 +1,6 @@
 __author__ = 'Aseem'
 
+import algos
 import combinatorics
 import files
 import lcm
@@ -19,8 +20,8 @@ def prob_001():
 
 def prob_002():
     a, b, limit = 1, 2, 4000000
-    total = a + sum(b for b in series.fibonacci(a, b, limit)
-                    if b % 2 == 0)
+    total = sum(b for b in series.fibonacci(a, b, limit)
+                if b % 2 == 0)
     return total
 
 
@@ -56,10 +57,9 @@ def prob_008():
         number += line
 
     largest = 0
-    for i in range(995):
-        product = 1
-        for j in range(5):
-            product *= int(number[i + j])
+    consecutive = 5
+    for i in range(len(number) - consecutive):
+        product = numbers.product_digits(number[i:i+consecutive])
         if product > largest:
             largest = product
     return largest
@@ -95,11 +95,12 @@ def prob_016():
 
 
 def prob_018():
-    mat = [[int(i) for i in line.split(' ')]
-           for line in files.get_lines(RESOURCES, "018.txt")]
-    for row_num in range(1, len(mat)):
-        pre = mat[row_num - 1]
-        cur = mat[row_num]
+    #TODO Refactor
+    matrix = [[int(i) for i in line.split(' ')]
+              for line in files.get_lines(RESOURCES, "018.txt")]
+    for row_num in range(1, len(matrix)):
+        pre = matrix[row_num - 1]
+        cur = matrix[row_num]
 
         for el_num in range(len(cur)):
             total = cur[el_num]
@@ -111,8 +112,21 @@ def prob_018():
                 total += pre[el_num - 1] if pre[el_num - 1] > pre[el_num] \
                     else pre[el_num]
 
-            mat[row_num][el_num] = total
-    return max(mat[len(mat) - 1])
+            matrix[row_num][el_num] = total
+    return max(matrix[len(matrix) - 1])
+
+
+def prob_019():
+    total = 0
+    days = 1 + 365
+    #1 for monday
+    #Added 365 because 1900 isn't a leap year
+    for num_days in algos.get_days(1901, 2001):
+        days += num_days[1]
+        days %= 7
+        if days == 0:
+            total += 1
+    return total
 
 
 def prob_020():
@@ -131,6 +145,12 @@ def prob_022():
             score += ord(c) - ord('A') + 1
         scores += (score * (i + 1))
     return scores
+
+
+def prob_025():
+    for b, i in zip(series.fibonacci_inf(1, 1), count(2)):
+        if len(str(b)) > 999:
+            return i
 
 
 def prob_029():

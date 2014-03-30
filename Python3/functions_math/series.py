@@ -1,6 +1,13 @@
 __author__ = 'Aseem'
 
 
+def fibonacci_inf(a, b):
+    """Lazily generates Fibonacci numbers Infinitely"""
+    while True:
+        yield b
+        a, b = b, a + b
+
+
 def fibonacci(a, b, num):
     """Lazily generates Fibonacci numbers"""
     while b < num:

@@ -1,6 +1,19 @@
 __author__ = 'Aseem'
 
 
+def collatz(num):
+    """"Lazily generated collatz sequence"""
+    def next_num(num):
+        if num % 2:
+            return 3 * num + 1
+        else:
+            return num // 2
+
+    while num != 1:
+        num = next_num(num)
+        yield num
+
+
 def fibonacci_inf(a, b):
     """Lazily generates Fibonacci numbers Infinitely"""
     while True:

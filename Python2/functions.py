@@ -23,13 +23,6 @@ def prime_factors(num):
 
     return ans
 ###
-def circular_shift(num, shift):
-    '''Returns a number circularly shifted '''
-    num = str(num)
-    length = len(num)
-    shift %= length
-    return int(num[length - shift:] + num [:length - shift])
-###
 def zeros_in_fact(num):
     '''Returns the number of zeros at the end of factorial of num'''
     if num < 0:

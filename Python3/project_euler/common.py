@@ -7,7 +7,7 @@ def _accumulate(row, sums):
     if sums is None:
         return row
     return ([row[0] + sums[0]]
-            + [row[i] + max(sums[i - 1], sums[i]) for i in range(1, len(sums) - 1)]
+            + [row[i] + max(sums[i - 1], sums[i]) for i in range(1, len(row) - 1)]
             + [row[-1] + sums[-1]])
 
 

@@ -16,14 +16,13 @@ def max_path_sum_triangle(triangle):
             elif el_num == len(cur) - 1:
                 total += pre[el_num - 1]
             else:
-                total += pre[el_num - 1] if pre[el_num - 1] > pre[el_num] \
-                    else pre[el_num]
+                total += max(pre[el_num - 1], pre[el_num])
 
             triangle[row_num][el_num] = total
-    return max(triangle[len(triangle) - 1])
+    return max(triangle[- 1])
 
 
 def max_path_sum_tri_file(path, file_name):
-    triangle = [[int(i) for i in line.split(' ')]
-                for line in files.get_lines(path, file_name)]
+    triangle = [[int(i) for i in line]
+                for line in files.get_lines(path, file_name, split_option=' ')]
     return max_path_sum_triangle(triangle)

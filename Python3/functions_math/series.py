@@ -15,7 +15,6 @@ def collatz(num):
 
 
 def fibonacci(a, b, limit=None):
-    #TODO Refactor
     """Lazily generates Fibonacci numbers"""
     loop_indefinitely = limit is None
     while loop_indefinitely or b < limit:

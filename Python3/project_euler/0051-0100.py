@@ -37,8 +37,8 @@ def prob_081():
 
 def prob_099():
     largest = 0
-    for i, line in zip(count(1), files.get_lines(RESOURCES, "099.txt")):
-        a, b = map(int, line.split(','))
+    for i, line in zip(count(1), files.get_lines(RESOURCES, "099.txt", split_option=',')):
+        a, b = map(int, line)
         current = b * math.log(a)
         if current > largest:
             largest = current

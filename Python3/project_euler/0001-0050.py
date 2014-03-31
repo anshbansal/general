@@ -21,9 +21,8 @@ def prob_001():
 
 def prob_002():
     a, b, limit = 1, 2, 4000000
-    total = sum(b for b in series.fibonacci(a, b, limit)
-                if b % 2 == 0)
-    return total
+    return sum(b for b in series.fibonacci(a, b, limit)
+               if b % 2 == 0)
 
 
 def prob_003():
@@ -53,14 +52,12 @@ def prob_007():
 
 
 def prob_008():
-    number = ''
-    for line in files.get_lines(RESOURCES, '008.txt'):
-        number += line
+    number_str = ''.join(files.get_lines(RESOURCES, '008.txt'))
 
     largest = 0
     consecutive = 5
-    for i in range(len(number) - consecutive):
-        product = numbers.product_digits(number[i:i+consecutive])
+    for i in range(len(number_str) - consecutive):
+        product = numbers.product_digits(number_str[i: i + consecutive])
         if product > largest:
             largest = product
     return largest
@@ -117,9 +114,8 @@ def prob_020():
 
 
 def prob_022():
-    for line in files.get_lines(RESOURCES, '022.txt'):
-        names = line.split(',')
-        names.sort()
+    names = files.get_line(RESOURCES, '022.txt', split_option=',')
+    names.sort()
 
     scores = 0
     for i in range(len(names)):
@@ -182,23 +178,19 @@ def prob_041():
 
 
 def prob_042():
-    for line in files.get_lines(RESOURCES, "042.txt"):
-        words = line.split(",")
-
+    words = files.get_line(RESOURCES, "042.txt", split_option=',')
     triangles = 0
     for word in words:
         value = sum((ord(c) - ord('A') + 1)
                     for c in word[1:-1])
         if numbers.is_triangle_num(value):
             triangles += 1
-
     return triangles
 
 
 def prob_045():
     for i in count(286):
         tri_num = numbers.triangle_num(i)
-
         if numbers.is_pentagonal_num(tri_num) and numbers.is_hexagonal_num(tri_num):
             return tri_num
 

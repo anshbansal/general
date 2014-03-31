@@ -2,7 +2,7 @@ __author__ = 'Aseem'
 
 import itertools
 import math
-import numbers
+import numbers_ab
 
 
 def is_prime(num):
@@ -79,6 +79,6 @@ def is_circular_prime(num, length):
         if not(int(i) % 2):
             return False
     for check in range(length):
-        if not is_prime(numbers.circular_shift(num, check + 1)):
+        if not is_prime(numbers_ab.circular_shift(num, check + 1)):
             return False
     return True

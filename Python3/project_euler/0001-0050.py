@@ -6,7 +6,7 @@ import combinatorics
 import files
 import lcm
 import math
-import numbers
+import numbers_ab
 import primes
 import series
 from itertools import count, permutations
@@ -34,7 +34,7 @@ def prob_004():
     for i in range(100, 1000):
         for j in range(i + 1, 1000):
             num = i * j
-            if num > largest and numbers.is_palindrome(num):
+            if num > largest and numbers_ab.is_palindrome(num):
                 largest = num
     return largest
 
@@ -57,7 +57,7 @@ def prob_008():
     largest = 0
     consecutive = 5
     for i in range(len(number_str) - consecutive):
-        product = numbers.product_digits(number_str[i: i + consecutive])
+        product = numbers_ab.product_digits(number_str[i: i + consecutive])
         if product > largest:
             largest = product
     return largest
@@ -73,7 +73,7 @@ def prob_009():
 
 
 def prob_010():
-    #TODO May be Optimized - Level 1 of 3
+    #TODO May be Optimized - 0.853 sec
     return sum(primes.primes_list(2000000))
 
 
@@ -140,13 +140,15 @@ def prob_029():
 
 
 def prob_035():
+    #TODO May be Optimized - 1.229 sec
     return(4 + sum(primes.is_circular_prime(i, len(str(i)))
                    for i in range(11, 1000000, 2)))
 
 
 def prob_036():
+    #TODO May be Optimized - 0.786 sec
     return sum(i for i in range(1, 1000000)
-               if numbers.is_palindrome(str(i)) and numbers.is_palindrome(bin(i)[2:]))
+               if numbers_ab.is_palindrome(str(i)) and numbers_ab.is_palindrome(bin(i)[2:]))
 
 
 def prob_040():
@@ -183,15 +185,15 @@ def prob_042():
     for word in words:
         value = sum((ord(c) - ord('A') + 1)
                     for c in word[1:-1])
-        if numbers.is_triangle_num(value):
+        if numbers_ab.is_triangle_num(value):
             triangles += 1
     return triangles
 
 
 def prob_045():
     for i in count(286):
-        tri_num = numbers.triangle_num(i)
-        if numbers.is_pentagonal_num(tri_num) and numbers.is_hexagonal_num(tri_num):
+        tri_num = numbers_ab.triangle_num(i)
+        if numbers_ab.is_pentagonal_num(tri_num) and numbers_ab.is_hexagonal_num(tri_num):
             return tri_num
 
 
@@ -209,7 +211,7 @@ def prob_046():
 
 
 def prob_047():
-    #TODO May be Optimized - Level 1 of 3
+    #TODO May be Optimized - 2.209 sec
     nums = 0
     for i in count(1):
         if primes.num_distinct_prime_factors(i) == 4:
@@ -226,10 +228,13 @@ def prob_048():
 
 if __name__ == "__main__":
     import sys
+    import time
 
     RULER = "====="
     LIST_FUNC = [i for i in dir(sys.modules[__name__])
                  if i.startswith('prob_') is True]
     for fname in LIST_FUNC:
-        print(fname + RULER, end="")
+        timm_t = time.time()
+        print(RULER + RULER + fname + RULER + RULER)
         print(locals()[fname]())
+        print("TIME " + RULER +  str(time.time() - timm_t))

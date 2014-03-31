@@ -3,6 +3,7 @@ __author__ = 'Aseem'
 import itertools
 import math
 import numbers_ab
+import operator
 
 
 def is_prime(num):
@@ -59,9 +60,8 @@ def primes_list(num):
     return [2] + [x for x in isprime if x]
 
 
-def num_distinct_prime_factors(num):
-    """returns the num of distinct prime factors for num > 0"""
-    ans = 0
+def _prime_factors_base(num, seed, operate, update_value=None):
+    ans = seed
     sqrt_num = math.floor(math.sqrt(num)) + 1
     for i in itertools.chain([2], range(3, sqrt_num, 2)):
         if num % i:
@@ -69,14 +69,28 @@ def num_distinct_prime_factors(num):
 
         while num % i == 0:
             num //= i
-        else:
-            ans += 1
-    return ans if num == 1 else ans + 1
+
+        ans = operate(ans, i if update_value is None else update_value)
+    return num, ans
+
+
+def num_distinct_prime_factors(num):
+    """returns the num of distinct prime factors for num > 0"""
+    num, ans = _prime_factors_base(num, 0, operator.add, 1)
+    if num == 1:
+        return ans
+    else:
+        return ans + 1
+
+
+def product_of_prime_factors(num):
+    num, ans = _prime_factors_base(num, 1, operator.mul)
+    return ans * num
 
 
 def is_circular_prime(num, length):
     for i in str(num):
-        if not(int(i) % 2):
+        if not (int(i) % 2):
             return False
     for check in range(length):
         if not is_prime(numbers_ab.circular_shift(num, check + 1)):

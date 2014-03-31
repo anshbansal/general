@@ -55,6 +55,14 @@ def is_hexagonal_num(n):
     return False
 
 
+def is_bouncy_num(num):
+    lisst1 = [int(i) for i in str(num)]
+    lisst2 = sorted(lisst1)
+    if (lisst1 == lisst2) or (lisst1 == lisst2[::-1]):
+        return False
+    return True
+
+
 def factorial(num):
     ans = 1
     while num > 1:

@@ -1,8 +1,8 @@
-#Taking 22 seconds
 import math
 
+
 def prob_206():
-    #TODO Can be optimized
+    #TODO Can be optimized - 13.65 sec
     #num1 = int(math.sqrt(10203040506070809))
     num2 = int(math.sqrt(19293949596979899))
     #print(num1, num2)

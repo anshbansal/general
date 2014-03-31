@@ -19,3 +19,8 @@ def _process_line(line, split_option):
         return line.rstrip('\n')
     else:
         return line.rstrip('\n').split(split_option)
+
+
+def read_int_from_lines(path, file_name, split_option=None):
+    return [[int(i) for i in line]
+            for line in get_lines(path, file_name, split_option=split_option)]

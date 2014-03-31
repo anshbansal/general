@@ -79,14 +79,6 @@ def num_of_divisors(num):
     
     return divisors
 ###
-def is_bouncy_num(num):
-    lisst1 = [int(i) for i in str(num)]
-    lisst2 = sorted(lisst1)
-    if (lisst1 == lisst2) or (lisst1 == lisst2[::-1]):
-        return False
-    else:
-        return True
-###
 def sum_of_proper_divisors(num):
     '''Proper Divisors => Divisors less than num'''
     #REQUIRES MATH MODULE

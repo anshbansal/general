@@ -19,6 +19,4 @@ def max_path_sum_triangle(rows):
 
 
 def max_path_sum_tri_file(path, file_name):
-    rows = [[int(i) for i in line]
-            for line in files.get_lines(path, file_name, split_option=' ')]
-    return max_path_sum_triangle(rows)
+    return max_path_sum_triangle(files.read_int_from_lines(path, file_name, split_option=' '))

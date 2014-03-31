@@ -11,6 +11,15 @@ from itertools import count, product
 RESOURCES = 'Resources'
 
 
+def prob_052():
+    for num in count(1):
+        for j in range(2, 7):
+            if set(str(j * num)) != set(str(num)):
+                break
+        else:
+            return num
+
+
 def prob_053():
     return sum(combinatorics.combinations(n, r) > 1000000
                for n in range(1, 101)
@@ -46,7 +55,7 @@ def prob_081():
     #TODO Refactor Maybe
     """"To understand how this works just make a (4,4) matrix"""
     size_matrix = 80
-    mat = [[int(i) for i in line] for line in files.get_lines(RESOURCES, "081.txt", ',')]
+    mat = files.read_int_from_lines(RESOURCES, "081.txt", split_option=',')
 
     for i in range(1, size_matrix):
         for j in range(i + 1):
@@ -54,12 +63,9 @@ def prob_081():
                 mat[i][j] += mat[i - 1][j]
                 mat[j][i] += mat[j][i - 1]
             else:
-                mat[i][j] += mat[i][j - 1] if mat[i - 1][j] > mat[i][j - 1] \
-                    else mat[i - 1][j]
-
+                mat[i][j] += min(mat[i][j - 1], mat[i - 1][j])
                 if i != j:
-                    mat[j][i] += mat[j - 1][i] if mat[j][i - 1] > mat[j - 1][i] \
-                        else mat[j][i - 1]
+                    mat[j][i] += min(mat[j - 1][i], mat[j][i - 1])
 
     return mat[size_matrix - 1][size_matrix - 1]
 

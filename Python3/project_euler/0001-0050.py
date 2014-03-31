@@ -211,7 +211,7 @@ def prob_046():
 
 
 def prob_047():
-    #TODO May be Optimized - 2.209 sec
+    #TODO May be Optimized - 2.348 sec
     nums = 0
     for i in count(1):
         if primes.num_distinct_prime_factors(i) == 4:

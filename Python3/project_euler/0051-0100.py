@@ -1,12 +1,41 @@
 __author__ = 'Aseem'
 
+import combinatorics
 import common
 import files
 import math
-from itertools import count
+import numbers_ab
+from itertools import count, product
 
 
 RESOURCES = 'Resources'
+
+
+def prob_053():
+    return sum(combinatorics.combinations(n, r) > 1000000
+               for n in range(1, 101)
+               for r in range(n + 1))
+
+
+def prob_055():
+    total = 0
+    for num in range(1, 10000):
+        for _ in range(1, 50):
+            num += numbers_ab.rev_num(num)
+            if numbers_ab.is_palindrome(num):
+                break
+        else:
+            total += 1
+    return total
+
+
+def prob_056():
+    sum_t = 0
+    for a, b in product(range(1, 100), repeat=2):
+        cur = sum(int(i) for i in str(a ** b))
+        if cur > sum_t:
+            sum_t = cur
+    return sum_t
 
 
 def prob_067():
@@ -33,6 +62,10 @@ def prob_081():
                         else mat[j][i - 1]
 
     return mat[size_matrix - 1][size_matrix - 1]
+
+
+def prob_097():
+    return (28433 * pow(2, 7830457, 10 ** 10)) % (10 ** 10) + 1
 
 
 def prob_099():

@@ -1,12 +1,12 @@
 __author__ = 'Aseem'
 
-#Taking 68 seconds
 import time
 import series
 
 
 def prob_014():
-    #TODO Optimize Maintaining a dictionary should be the best way
+    #TODO Optimize - 68 sec
+    #Maintaining a dictionary should be the best way
     longest = 1
     longest_num = 1
     for i in range(1, 1000000):

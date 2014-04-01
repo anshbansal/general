@@ -60,8 +60,7 @@ def primes_list(num):
     return [2] + [x for x in isprime if x]
 
 
-def _prime_factors_base(num, seed, operate, update_value=None):
-    ans = seed
+def prime_factors(num):
     sqrt_num = math.floor(math.sqrt(num)) + 1
     for i in itertools.chain([2], range(3, sqrt_num, 2)):
         if num % i:
@@ -69,23 +68,21 @@ def _prime_factors_base(num, seed, operate, update_value=None):
 
         while num % i == 0:
             num //= i
-
-        ans = operate(ans, i if update_value is None else update_value)
-    return num, ans
+        yield i
+    if num != 1:
+        yield num
 
 
 def num_distinct_prime_factors(num):
     """returns the num of distinct prime factors for num > 0"""
-    num, ans = _prime_factors_base(num, 0, operator.add, 1)
-    if num == 1:
-        return ans
-    else:
-        return ans + 1
+    return sum(1 for _ in prime_factors(num))
 
 
 def product_of_prime_factors(num):
-    num, ans = _prime_factors_base(num, 1, operator.mul)
-    return ans * num
+    ans = 1
+    for i in prime_factors(num):
+        ans *= i
+    return ans
 
 
 def is_circular_prime(num, length):

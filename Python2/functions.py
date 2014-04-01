@@ -1,27 +1,4 @@
 import math
-def prime_factors(num):
-    '''Returns the prime factors of a number'''
-    if num < 1:
-        return 0
-    ans = []
-
-    if num % 2 == 0:
-        ans.append(2)
-        num /= 2
-        while num % 2 == 0:
-            num /= 2
-
-    i = 3
-    while i <= num:
-        if num % i == 0:
-            ans.append(i)
-            num /= i
-            while num % i == 0:
-                num /= i
-
-        i += 2
-
-    return ans
 ###
 def zeros_in_fact(num):
     '''Returns the number of zeros at the end of factorial of num'''
@@ -32,15 +9,6 @@ def zeros_in_fact(num):
         num /=  5
         fives += num
     return fives
-###
-def sum_primes(num):
-    '''Returns the sum of primes upto num(inclusive)'''
-    #REQUIRES primes_list() function
-    listt = primes_list(num)
-    total = 0
-    for i in listt:
-        total += i
-    return total
 ###
 def reverse_trunc(num, times = 1):
     '''Returns a number by truncating its Most Significant Digits

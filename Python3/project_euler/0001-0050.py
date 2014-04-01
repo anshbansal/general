@@ -9,6 +9,7 @@ import math
 import numbers_ab
 import primes
 import series
+import utils_ab
 from itertools import count, permutations
 
 
@@ -73,8 +74,21 @@ def prob_009():
 
 
 def prob_010():
-    #TODO May be Optimized - 0.853 sec
+    #TODO May be Optimized - 0.875 sec
     return sum(primes.primes_list(2000000))
+
+
+def prob_012():
+    #TODO May be Optimized - 7.5 sec
+    max_div = 1
+    for num in count(1):
+        tri_num = numbers_ab.triangle_num(num)
+        div = numbers_ab.num_of_divisors(tri_num)
+        if div > max_div:
+            max_div = div
+            max_tri = tri_num
+            if max_div >= 500:
+                return max_tri
 
 
 def prob_013():
@@ -140,13 +154,13 @@ def prob_029():
 
 
 def prob_035():
-    #TODO May be Optimized - 1.229 sec
+    #TODO May be Optimized - 1.230 sec
     return(4 + sum(primes.is_circular_prime(i, len(str(i)))
                    for i in range(11, 1000000, 2)))
 
 
 def prob_036():
-    #TODO May be Optimized - 0.786 sec
+    #TODO May be Optimized - 0.800 sec
     return sum(i for i in range(1, 1000000)
                if numbers_ab.is_palindrome(str(i)) and numbers_ab.is_palindrome(bin(i)[2:]))
 
@@ -169,10 +183,7 @@ def prob_041():
     largest = 0
     for i in range(1, 9):
         for j in permutations(range(1, i + 1)):
-            temp = 0
-            for c in j:
-                temp *= 10
-                temp += c
+            temp = utils_ab.iterable_to_int(j)
             if temp > largest and primes.is_prime(temp):
                 largest = temp
 
@@ -188,6 +199,23 @@ def prob_042():
         if numbers_ab.is_triangle_num(value):
             triangles += 1
     return triangles
+
+
+def prob_043():
+    #TODO Maybe Optimized - 11.077 sec
+    total = 0
+    divisors = [2, 3, 5, 7, 11, 13, 17]
+    for i in permutations(range(10)):
+        if i[0] == 0:
+            continue
+
+        temp = str(utils_ab.iterable_to_int(i))
+        for j in range(7, 0, -1):
+            if int(temp[j:j + 3]) % divisors[j - 1]:
+                break
+        else:
+            total += int(temp)
+    return total
 
 
 def prob_045():
@@ -211,7 +239,7 @@ def prob_046():
 
 
 def prob_047():
-    #TODO May be Optimized - 2.348 sec
+    #TODO May be Optimized - 2.893 sec
     nums = 0
     for i in count(1):
         if primes.num_distinct_prime_factors(i) == 4:

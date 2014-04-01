@@ -17,10 +17,10 @@ def prob_112():
 
 
 def prob_124():
-    #TODO May be Optimized - 1.672 sec
-    return sorted(
-        [(primes.product_of_prime_factors(i), i)
-         for i in range(1, 100001)])[9999][1]
+    #TODO May be Optimized - 1.952 sec
+    listt_tuples = [(primes.product_of_prime_factors(i), i)
+                    for i in range(1, 100001)]
+    return sorted(listt_tuples)[-1][1]
 
 
 if __name__ == "__main__":

@@ -3,7 +3,6 @@ __author__ = 'Aseem'
 import itertools
 import math
 import numbers_ab
-import operator
 
 
 def is_prime(num):

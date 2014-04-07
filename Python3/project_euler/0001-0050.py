@@ -128,7 +128,7 @@ def prob_020():
 
 
 def prob_021():
-    sums = [numbers_ab.sum_of_divisors(i) - i for i in range(10000)]
+    sums = [numbers_ab.sum_proper_divisors(i) for i in range(10000)]
 
     total = 0
     for i in range(10000):
@@ -152,6 +152,20 @@ def prob_022():
             score += ord(c) - ord('A') + 1
         scores += (score * (i + 1))
     return scores
+
+
+def prob_023():
+    listt = []
+    total = 0
+    for i in range(1, 28124):
+        listt.append(i < numbers_ab.sum_proper_divisors(i))
+
+        for j in range(1, i):
+            if listt[j - 1] and listt[i - j - 1]:
+                break
+        else:
+            total += i
+    return total
 
 
 def prob_025():

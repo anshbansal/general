@@ -108,3 +108,7 @@ def num_of_divisors(num):
 
 def sum_of_divisors(num):
     return sum(divisors_of_num(num))
+
+
+def sum_proper_divisors(num):
+    return sum_of_divisors(num) - num

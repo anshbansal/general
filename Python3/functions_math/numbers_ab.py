@@ -112,3 +112,26 @@ def sum_of_divisors(num):
 
 def sum_proper_divisors(num):
     return sum_of_divisors(num) - num
+
+
+def zeros_in_fact(num):
+    if num < 0:
+        return 0
+    fives = 0
+    while num:
+        num //= 5
+        fives += num
+    return fives
+
+
+def reverse_trunc(num, times=1):
+    """Returns a number by truncating its MSD By default it truncates one digit"""
+    return num % (10 ** (len(str(num)) - times))
+
+
+def decimal_to_other(num, base):
+    add = num % base
+    if num <= 1:
+        return str(num)
+    else:
+        return str(decimal_to_other(num//base, base)) + str(add)

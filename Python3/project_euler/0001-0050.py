@@ -155,6 +155,7 @@ def prob_022():
 
 
 def prob_023():
+    #TODO May be Optimized -3.035 sec
     listt = []
     total = 0
     for i in range(1, 28124):
@@ -281,7 +282,6 @@ def prob_047():
 def prob_048():
     return str(sum(i ** i for i in range(1, 1001)))[-10:]
 
-
 if __name__ == "__main__":
     import sys
     import time
@@ -291,6 +291,7 @@ if __name__ == "__main__":
                  if i.startswith('prob_') is True]
     for fname in LIST_FUNC:
         timm_t = time.time()
-        print(RULER + RULER + fname + RULER + RULER)
-        print(locals()[fname]())
-        print("TIME " + RULER +  str(time.time() - timm_t))
+        print(RULER + RULER + fname + RULER + RULER + str(locals()[fname]()))
+        temp_time = time.time() - timm_t
+        if temp_time > 0.5:
+            print("TIME " + RULER +  str(temp_time))

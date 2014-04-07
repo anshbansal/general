@@ -95,6 +95,7 @@ if __name__ == "__main__":
                  if i.startswith('prob_') is True]
     for fname in LIST_FUNC:
         timm_t = time.time()
-        print(RULER + RULER + fname + RULER + RULER)
-        print(locals()[fname]())
-        print("TIME " + RULER +  str(time.time() - timm_t))
+        print(RULER + RULER + fname + RULER + RULER + str(locals()[fname]()))
+        temp_time = time.time() - timm_t
+        if temp_time > 0.5:
+            print("TIME " + RULER +  str(temp_time))

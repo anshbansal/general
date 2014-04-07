@@ -84,25 +84,27 @@ def circular_shift(num, shift=1):
     return int(num[length - shift:] + num[:length - shift])
 
 
-def num_of_divisors(num):
-    """Returns the number of divisors of a number(num inclusive)"""
-    if num < 1:
-        return 0
-    elif num == 1:
-        return 1
+def divisors_of_num(num):
+    if num < 2:
+        if num == 1:
+            yield 1
+        return
 
     temp = math.sqrt(num)
-    if temp == int(temp):  #num => Perfect square
-        divisors = 3
-        temp = int(temp)
+    counter = temp_i = int(temp)
+    if temp == temp_i:
+        yield temp_i
     else:
-        temp = int(temp) + 1
-        divisors = 2
+        counter += 1
+    for i in range(1, counter):
+        if num % i == 0:
+            yield i
+            yield num // i
 
-    for i in range(2, temp):
-        if num % i:
-            pass  #When i not divisor of num
-        else:
-            divisors += 2
 
-    return divisors
+def num_of_divisors(num):
+    return sum(1 for _ in divisors_of_num(num))
+
+
+def sum_of_divisors(num):
+    return sum(divisors_of_num(num))

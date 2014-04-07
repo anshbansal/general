@@ -79,7 +79,7 @@ def prob_010():
 
 
 def prob_012():
-    #TODO May be Optimized - 7.5 sec
+    #TODO May be Optimized - 8.421 sec
     max_div = 1
     for num in count(1):
         tri_num = numbers_ab.triangle_num(num)
@@ -125,6 +125,20 @@ def prob_019():
 
 def prob_020():
     return sum(int(i) for i in str(math.factorial(100)))
+
+
+def prob_021():
+    sums = [numbers_ab.sum_of_divisors(i) - i for i in range(10000)]
+
+    total = 0
+    for i in range(10000):
+        b = sums[i]
+
+        if b >= 10000 or b == i:
+            continue
+        if sums[b] == i:
+            total += i
+    return total
 
 
 def prob_022():

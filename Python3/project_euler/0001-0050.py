@@ -74,12 +74,12 @@ def prob_009():
 
 
 def prob_010():
-    #TODO May be Optimized - 0.875 sec
+    #TODO May be Optimized - 0.929 sec
     return sum(primes.primes_list(2000000))
 
 
 def prob_012():
-    #TODO May be Optimized - 8.421 sec
+    #TODO May be Optimized - 9.841 sec
     max_div = 1
     for num in count(1):
         tri_num = numbers_ab.triangle_num(num)
@@ -155,7 +155,7 @@ def prob_022():
 
 
 def prob_023():
-    #TODO May be Optimized -3.035 sec
+    #TODO May be Optimized -3.577 sec
     listt = []
     total = 0
     for i in range(1, 28124):
@@ -189,7 +189,7 @@ def prob_035():
 
 
 def prob_036():
-    #TODO May be Optimized - 0.800 sec
+    #TODO May be Optimized - 0.886 sec
     return sum(i for i in range(1, 1000000)
                if numbers_ab.is_palindrome(str(i)) and numbers_ab.is_palindrome(bin(i)[2:]))
 
@@ -231,7 +231,7 @@ def prob_042():
 
 
 def prob_043():
-    #TODO Maybe Optimized - 11.077 sec
+    #TODO Maybe Optimized - 12.348 sec
     total = 0
     divisors = [2, 3, 5, 7, 11, 13, 17]
     for i in permutations(range(10)):

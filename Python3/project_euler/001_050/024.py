@@ -13,4 +13,7 @@ def prob_024():
             return j
 
 if __name__ == "__main__":
+    import time
+    s = time.time()
     print(prob_024())
+    print(time.time() - s)

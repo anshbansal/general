@@ -175,6 +175,14 @@ def prob_025():
             return i
 
 
+def prob_028():
+    #To do this I derived the formula for sum of corners in n x n spiral
+    #It's easy to find the pattern if you consider the outer ring only in spiral
+    def sum_of_outer_ring(n):
+        return 4*(n*n) - 6 * (n - 1)
+    return 1 + sum(sum_of_outer_ring(i) for i in range(3, 1002, 2))
+
+
 def prob_029():
     return len({pow(a, b)
                 for a in range(2, 101)

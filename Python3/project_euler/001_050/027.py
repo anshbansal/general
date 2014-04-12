@@ -13,7 +13,7 @@ def num_primes(a, b):
 
 
 def prob_027():
-    #TODO Maybe optimized - 1.699 sec
+    #TODO Maybe optimized - 1.734 sec
     b_list = primes.primes_list(1000)
     max_primes = (0, 0)
     for a in range(-999, 1000):

@@ -59,6 +59,53 @@ def primes_list(num):
     return [2] + [x for x in isprime if x]
 
 
+def primes_list_mem(num, isprime=[3]):
+    """Returns list of Prime numbers
+
+    Advantage:
+    Half memory usage
+    Takes 1/10th time if called in the same run for same or lower number
+    Improvement in speed if it has been called before
+
+    Disadvantage:
+    Has storage between function calls - Takes up a lot of memory space"""
+    if num < 2:
+        return []
+
+    if num > 2 * len(isprime) + 2:
+        def mapping(x):
+            return (x - 3)//2
+
+        first_new = 2 * len(isprime) + 3
+        isprime += [num for num in range(first_new, num + 1, 2)]
+
+        temp2 = int(math.sqrt(num)) + 1
+        for i in range(3, first_new, 2):
+            if isprime[mapping(i)]:
+                j = first_new//i
+                if j == 1:
+                    j = 3
+                elif j % 2 == 0:
+                    j += 1
+
+                temp = j * i
+                while temp <= num:
+                    isprime[mapping(temp)] = 0
+                    j += 2
+                    temp = j * i
+
+        for i in range(first_new, temp2, 2):
+            if isprime[mapping(i)]:
+                j = 3
+                temp = j * i
+                while temp <= num:
+                    isprime[mapping(temp)] = 0
+                    j += 2
+                    temp = j * i
+
+    return [2] + [x for x in isprime[:(num - 1)//2] if x]
+
+
 def prime_factors(num):
     sqrt_num = math.floor(math.sqrt(num)) + 1
     for i in itertools.chain([2], range(3, sqrt_num, 2)):

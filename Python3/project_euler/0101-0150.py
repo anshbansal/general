@@ -6,7 +6,7 @@ from itertools import count
 
 
 def prob_112():
-    #TODO May be Optimized - 7.215 sec
+    #TODO May be Optimized - 7.576 sec
     bouncy = 0
     for i in count(2):
         if numbers_ab.is_bouncy_num(i):

@@ -74,7 +74,6 @@ def prob_009():
 
 
 def prob_010():
-    #TODO May be Optimized - 0.929 sec
     return sum(primes.primes_list(2000000))
 
 
@@ -197,7 +196,6 @@ def prob_035():
 
 
 def prob_036():
-    #TODO May be Optimized - 0.886 sec
     return sum(i for i in range(1, 1000000)
                if numbers_ab.is_palindrome(str(i)) and numbers_ab.is_palindrome(bin(i)[2:]))
 
@@ -301,5 +299,5 @@ if __name__ == "__main__":
         timm_t = time.time()
         print(RULER + RULER + fname + RULER + RULER + str(locals()[fname]()))
         temp_time = time.time() - timm_t
-        if temp_time > 0.5:
+        if temp_time > 1.0:
             print("TIME " + RULER +  str(temp_time))

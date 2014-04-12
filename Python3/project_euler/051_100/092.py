@@ -12,7 +12,7 @@ def sum_of_squares_of_digits(num):
 
 
 def prob_092():
-    #TODO Maybe Optimize - 56.984 sec
+    #TODO Maybe Optimize - 59.801 sec
     ends = [0] * 10000001
     for i in range(1, 10000000):
         members = set([i])
@@ -23,11 +23,11 @@ def prob_092():
             q([temp])
 
         if ends[temp]:
-            for i in members:
-                ends[i] = ends[temp]
+            for j in members:
+                ends[j] = ends[temp]
         else:
-            for i in members:
-                ends[i] = temp
+            for j in members:
+                ends[j] = temp
 
     return Counter(ends)
 

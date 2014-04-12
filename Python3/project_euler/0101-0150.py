@@ -34,5 +34,5 @@ if __name__ == "__main__":
         timm_t = time.time()
         print(RULER + RULER + fname + RULER + RULER + str(locals()[fname]()))
         temp_time = time.time() - timm_t
-        if temp_time > 0.5:
+        if temp_time > 1.0:
             print("TIME " + RULER +  str(temp_time))

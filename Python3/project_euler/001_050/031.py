@@ -2,7 +2,6 @@ __author__ = 'Aseem'
 
 
 def prob_031():
-    #TODO Optimize Took 1.407 seconds
     ways = 1
     for i in range(3):
         sum_a = i * 100

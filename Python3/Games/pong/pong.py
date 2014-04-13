@@ -3,11 +3,13 @@ from classes_pong import Paddle, Ball, ScoreArea
 import pygame
 from pygame.locals import *
 
-#Constants for Dimensions
+#Screen Constants
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-SCORES_HEIGHT = 100
 SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
+
+#Screen area constants
+SCORES_HEIGHT = 100
 PLAY_AREA = (0, SCREEN_WIDTH, SCORES_HEIGHT, SCREEN_HEIGHT)
 
 #Other Game constants
@@ -17,18 +19,12 @@ WHITE = (255, 255, 255)
 
 def get_objects():
     """Gives the 3 objects in the game"""
-    player = Paddle(
-        SCREEN_SIZE[0] // 20, SCREEN_SIZE[1] // 2,
-        Paddle.WIDTH, Paddle.HEIGHT, WHITE)
-    comp = Paddle(
-        (18.7 * SCREEN_SIZE[0]) // 20, SCREEN_SIZE[1] // 2,
-        Paddle.WIDTH, Paddle.HEIGHT, WHITE)
-    ball = Ball(
-        SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] // 2,
-        10, WHITE)
-    scoreArea = ScoreArea(SCORES_HEIGHT, SCREEN_WIDTH)
+    player = Paddle(SCREEN_SIZE[0] // 20, SCREEN_SIZE[1] // 2, WHITE)
+    comp = Paddle((18.7 * SCREEN_SIZE[0]) // 20, SCREEN_SIZE[1] // 2, WHITE)
+    ball = Ball(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] // 2, 10, WHITE)
+    score_area = ScoreArea(SCORES_HEIGHT, SCREEN_WIDTH)
 
-    return player, comp, ball, scoreArea
+    return player, comp, ball, score_area
 
 
 def movement(cur_pad):

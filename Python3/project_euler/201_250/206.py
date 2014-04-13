@@ -2,11 +2,10 @@ import math
 
 
 def prob_206():
-    #TODO Can be optimized - 13.65 sec
     #num1 = int(math.sqrt(10203040506070809))
     num2 = int(math.sqrt(19293949596979899))
     #print(num1, num2)
-    
+
     for num1 in [101010103, 101010107]:
     # 3*3 = 9, 7*7 = 49
     #Hence num1 has these 2 values

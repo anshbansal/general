@@ -3,7 +3,6 @@ import primes
 
 
 def prob_058():
-    #TODO May be Optimized - 7.154 sec
     num_primes = 0
     non_primes = 1
     for n in count(3, 2):

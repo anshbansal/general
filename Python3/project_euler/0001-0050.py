@@ -78,7 +78,6 @@ def prob_010():
 
 
 def prob_012():
-    #TODO May be Optimized - 9.841 sec
     max_div = 1
     for num in count(1):
         tri_num = numbers_ab.triangle_num(num)
@@ -154,7 +153,6 @@ def prob_022():
 
 
 def prob_023():
-    #TODO May be Optimized -3.577 sec
     listt = []
     total = 0
     for i in range(1, 28124):
@@ -190,7 +188,6 @@ def prob_029():
 
 
 def prob_035():
-    #TODO May be Optimized - 1.230 sec
     return(4 + sum(primes.is_circular_prime(i, len(str(i)))
                    for i in range(11, 1000000, 2)))
 
@@ -237,7 +234,6 @@ def prob_042():
 
 
 def prob_043():
-    #TODO Maybe Optimized - 12.348 sec
     total = 0
     divisors = [2, 3, 5, 7, 11, 13, 17]
     for i in permutations(range(10)):
@@ -274,7 +270,6 @@ def prob_046():
 
 
 def prob_047():
-    #TODO May be Optimized - 2.893 sec
     nums = 0
     for i in count(1):
         if primes.num_distinct_prime_factors(i) == 4:
@@ -299,5 +294,5 @@ if __name__ == "__main__":
         timm_t = time.time()
         print(RULER + RULER + fname + RULER + RULER + str(locals()[fname]()))
         temp_time = time.time() - timm_t
-        if temp_time > 1.0:
+        if temp_time > 55.0:
             print("TIME " + RULER +  str(temp_time))

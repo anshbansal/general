@@ -5,7 +5,6 @@ from math import factorial
 
 
 def prob_034():
-    #TODO May be Optimized - 5.219 sec
     facts = [factorial(i) for i in range(10)]
     ans = 0
     for i in range(10, 2540161):

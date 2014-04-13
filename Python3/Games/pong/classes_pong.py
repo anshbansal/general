@@ -24,14 +24,14 @@ class Paddle(Shape):
     HEIGHT = 50
     SPEED = 3
 
-    def __init__(self, x, y, width, height, color):
+    def __init__(self, x, y, color, width=WIDTH, height=HEIGHT):
         super().__init__()
         self.width = 0
         self.height = 0
         self.rect = None
         self.set_position(x, y)
-        self.set_dimension(width, height)
         self.set_color(color)
+        self.set_dimension(width, height)
 
     #Main Functions
     def set_position(self, x, y):

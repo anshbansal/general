@@ -3,11 +3,11 @@ __author__ = 'Aseem'
 
 def collatz(num):
     """"Lazily generated collatz sequence"""
-    def next_num(num):
-        if num % 2:
-            return 3 * num + 1
+    def next_num(cur):
+        if cur % 2:
+            return 3 * cur + 1
         else:
-            return num // 2
+            return cur // 2
 
     while num != 1:
         num = next_num(num)
@@ -30,18 +30,5 @@ def sum_squares(num):
     return (num * (num + 1) * (2 * num + 1)) // 6
 
 
-def sum_multiples_upto(nums, upto):
-    #TODO Needs to be refactored
-    def sum_upto(num, upto):
-        return num * sum_numbers(upto // num)
-
-    if type(nums) is int:
-        return sum_upto(nums, upto)
-    if len(nums) > 2 or type(nums) is not tuple:
-        return -1
-
-    upto -= 1
-    ans = sum_upto(nums[0], upto)
-    ans += sum_upto(nums[1], upto)
-    ans -= sum_upto(nums[0] * nums[1], upto)
-    return int(ans)
+def sum_multiples_upto(multiples_of, limit):
+    return sum(i for i in range(1, limit) if any(i % num == 0 for num in multiples_of))

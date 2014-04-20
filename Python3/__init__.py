@@ -1,3 +1,2 @@
-__all__ = ['functions', 'functions_math']
+__all__ = ['functions']
 import functions
-import functions_math

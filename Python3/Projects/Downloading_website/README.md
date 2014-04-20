@@ -1,5 +1,3 @@
 Downloading Website
 =======================
-- I am making this mainly for downloading the C library eference from the website cplusplus.com
-
-- After I am done I think it might be useful for other websites also.
+This was a project that I had started to download documentation of C Library reference from the website cplusplus.com. This is on hold as I want to clean up my code base before proceeding with other projects.

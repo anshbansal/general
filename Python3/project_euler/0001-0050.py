@@ -1,6 +1,7 @@
 __author__ = 'Aseem'
 
 import algos
+import calendar
 import common
 import combinatorics
 import files
@@ -109,16 +110,12 @@ def prob_018():
 
 
 def prob_019():
-    total = 0
-    days = 1 + 365
-    #1 for monday
-    #Added 365 because 1900 isn't a leap year
-    for num_days in algos.get_days(1901, 2001):
-        days += num_days[1]
-        days %= 7
-        if days == 0:
-            total += 1
-    return total
+    ans = 0
+    for month in range(1, 13):
+        for year in range(1901, 2001):
+            if calendar.monthrange(year, month)[0] == 6:
+                ans += 1
+    return ans
 
 
 def prob_020():

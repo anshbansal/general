@@ -13,10 +13,10 @@ def take_registry_backup():
     registry_user_variable()
 
 
-def start_task(task):
-    print(task[1] + " START")
-    task[0]()
-    print(task[1] + " END")
+def start_task(cur_task):
+    print(cur_task[1] + " START")
+    cur_task[0]()
+    print(cur_task[1] + " END")
 
 if __name__ == "__main__":
     TASKS = [(take_registry_backup, "Registry Backup")]

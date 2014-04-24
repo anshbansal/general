@@ -17,10 +17,9 @@ def prob_112():
 
 
 def prob_124():
-    #TODO Bug present
     listt_tuples = [(primes.product_of_prime_factors(i), i)
                     for i in range(1, 100001)]
-    return sorted(listt_tuples)[-1][1]
+    return sorted(listt_tuples)[9999][1]
 
 if __name__ == "__main__":
     common.run_all(__name__)

@@ -21,4 +21,4 @@ if __name__ == "__main__":
     import time
     s = time.time()
     print(prob_206())
-    print (time.time() - s)
+    print(time.time() - s)

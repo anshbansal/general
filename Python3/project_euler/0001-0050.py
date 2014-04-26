@@ -11,7 +11,7 @@ import primes
 import series
 import utils_ab
 from numbers_ab import *
-from itertools import count, permutations
+from itertools import count, permutations, islice
 
 
 RESOURCES = 'Resources'
@@ -152,6 +152,11 @@ def prob_023():
         else:
             total += i
     return total
+
+
+def prob_024():
+    for cur_per in islice(permutations("0123456789"), 999999, 999999 + 1):
+        return utils_ab.iterable_to_int(cur_per)
 
 
 def prob_025():

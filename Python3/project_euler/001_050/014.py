@@ -1,6 +1,7 @@
 __author__ = 'Aseem'
 
 import time
+import common
 import series
 
 
@@ -16,7 +17,6 @@ def prob_014():
             longest_num = i
     print(longest_num, "produces sequence of length = ", longest)
 
-
 s = time.time()
-prob_014()
+common.run_all(__name__)
 print(time.time() - s)

@@ -12,11 +12,11 @@ RESOURCES = 'Resources'
 
 
 def prob_052():
+    def set_of_digits(cur_num):
+        return set(str(cur_num))
+
     for num in count(1):
-        for j in range(2, 7):
-            if set(str(j * num)) != set(str(num)):
-                break
-        else:
+        if all(set_of_digits(j * num) == set_of_digits(num) for j in range(2, 7)):
             return num
 
 

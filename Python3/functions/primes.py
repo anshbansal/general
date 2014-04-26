@@ -33,7 +33,7 @@ def largest_prime_factor(num):
 def nth_prime(num):
     """"Returns the Nth prime"""
     pos = num
-    fun = primes_list(pos)
+    fun = primes_list_mem(pos)
     while len(fun) < num:
         pos *= 2
         fun = primes_list(pos)

@@ -1,5 +1,6 @@
 __author__ = 'Aseem'
 
+#Most of these are in functions directory
 import calendar
 import common
 import combinatorics
@@ -21,8 +22,7 @@ def prob_001():
 
 
 def prob_002():
-    a, b, limit = 1, 2, 4000000
-    return sum(b for b in series.fibonacci(a, b, limit)
+    return sum(b for b in series.fibonacci(1, 2, 4000000)
                if b % 2 == 0)
 
 
@@ -55,13 +55,9 @@ def prob_007():
 def prob_008():
     number_str = ''.join(files.get_lines(RESOURCES, '008.txt'))
 
-    largest = 0
     consecutive = 5
-    for i in range(len(number_str) - consecutive):
-        product = numbers_ab.product_digits(number_str[i: i + consecutive])
-        if product > largest:
-            largest = product
-    return largest
+    return max(numbers_ab.product_digits(number_str[i: i + consecutive])
+               for i in range(len(number_str) - consecutive))
 
 
 def prob_009():
@@ -78,15 +74,11 @@ def prob_010():
 
 
 def prob_012():
-    max_div = 1
     for num in count(1):
-        tri_num = numbers_ab.triangle_num(num)
-        div = numbers_ab.num_of_divisors(tri_num)
-        if div > max_div:
-            max_div = div
-            max_tri = tri_num
-            if max_div >= 500:
-                return max_tri
+        cur_tri_num = numbers_ab.triangle_num(num)
+        div = numbers_ab.num_of_divisors(cur_tri_num)
+        if div > 500:
+            return cur_tri_num
 
 
 def prob_013():

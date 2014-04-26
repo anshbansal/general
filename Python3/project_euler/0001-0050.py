@@ -11,7 +11,8 @@ import primes
 import series
 import utils_ab
 from numbers_ab import *
-from itertools import count, permutations, islice
+from fractions import Fraction
+from itertools import count, islice, permutations, product
 
 
 RESOURCES = 'Resources'
@@ -114,6 +115,7 @@ def prob_020():
 
 
 def prob_021():
+    #TODO Refactor Maybe
     sums = [sum_proper_divisors(i) for i in range(10000)]
 
     total = 0
@@ -180,6 +182,34 @@ def prob_029():
                )
 
 
+def prob_033():
+    ans = Fraction(1, 1)
+    for num, den in product(range(10, 100), repeat=2):
+        if num >= den:
+            continue
+
+        num_list = [i for i in str(num)]
+        den_list = [i for i in str(den)]
+        temp_list = [i for i in num_list if i in den_list]
+
+        if len(temp_list) != 1 or '0' in temp_list:
+            continue
+
+        num_list.remove(temp_list[0])
+        den_list.remove(temp_list[0])
+
+        num2 = int(num_list[0])
+        den2 = int(den_list[0])
+
+        if not(num2 and den2):
+            continue
+
+        if Fraction(num, den) == Fraction(num2, den2):
+            ans *= Fraction(num, den)
+
+    return ans.denominator
+
+
 def prob_035():
     return(4 + sum(primes.is_circular_prime(i, len(str(i)))
                    for i in range(11, 1000000, 2)))
@@ -188,6 +218,28 @@ def prob_035():
 def prob_036():
     return sum(i for i in range(1, 1000000)
                if is_palindrome(str(i)) and is_palindrome(bin(i)[2:]))
+
+
+def prob_039():
+    maximum = 0
+    maximum_p = 3
+    for param in range(3, 1001):
+        cur = 0
+        for a in range(1, param-1):
+            #This equation can be obtained by solving the two given equations
+            b = (param * (param - 2 * a))/(2.0 * (param - a))
+            if b != int(b):
+                continue
+            c = param - a - b
+            if c <= 0:
+                break
+            if a*a + b*b == c*c:
+                cur += 1
+        else:
+            if cur > maximum:
+                maximum = cur
+                maximum_p = param
+    return maximum_p
 
 
 def prob_040():

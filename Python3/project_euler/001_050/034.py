@@ -1,21 +1,19 @@
-#The limit of 2540161 is chosen because it is 7 * 9!
-#See 2540162 It is seven digits but for factorial's value
-#to increase the number of digits will have to be 8
 from math import factorial
 
 
 def prob_034():
     facts = [factorial(i) for i in range(10)]
     ans = 0
-    for i in range(10, 2540161):
+    limit = factorial(9) * 7
+    for num in range(10, limit):
+        temp_num = num
         sums = 0
-        temp = i
-        while temp:
-            sums += facts[temp % 10]
-            temp //= 10
+        while temp_num:
+            sums += facts[temp_num % 10]
+            temp_num //= 10
 
-        if sums == i:
-            ans += i
+        if sums == num:
+            ans += num
 
     return ans
 

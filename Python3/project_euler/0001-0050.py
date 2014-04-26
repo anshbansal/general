@@ -7,10 +7,10 @@ import combinatorics
 import files
 import lcm
 import math
-import numbers_ab
 import primes
 import series
 import utils_ab
+from numbers_ab import *
 from itertools import count, permutations
 
 
@@ -35,7 +35,7 @@ def prob_004():
     for i in range(100, 1000):
         for j in range(i + 1, 1000):
             num = i * j
-            if num > largest and numbers_ab.is_palindrome(num):
+            if num > largest and is_palindrome(num):
                 largest = num
     return largest
 
@@ -56,7 +56,7 @@ def prob_008():
     number_str = ''.join(files.get_lines(RESOURCES, '008.txt'))
 
     consecutive = 5
-    return max(numbers_ab.product_digits(number_str[i: i + consecutive])
+    return max(product_digits(number_str[i: i + consecutive])
                for i in range(len(number_str) - consecutive))
 
 
@@ -75,8 +75,8 @@ def prob_010():
 
 def prob_012():
     for num in count(1):
-        cur_tri_num = numbers_ab.triangle_num(num)
-        div = numbers_ab.num_of_divisors(cur_tri_num)
+        cur_tri_num = triangle_num(num)
+        div = num_of_divisors(cur_tri_num)
         if div > 500:
             return cur_tri_num
 
@@ -114,7 +114,7 @@ def prob_020():
 
 
 def prob_021():
-    sums = [numbers_ab.sum_proper_divisors(i) for i in range(10000)]
+    sums = [sum_proper_divisors(i) for i in range(10000)]
 
     total = 0
     for i in range(10000):
@@ -144,7 +144,7 @@ def prob_023():
     listt = []
     total = 0
     for i in range(1, 28124):
-        listt.append(i < numbers_ab.sum_proper_divisors(i))
+        listt.append(i < sum_proper_divisors(i))
 
         for j in range(1, i):
             if listt[j - 1] and listt[i - j - 1]:
@@ -182,7 +182,7 @@ def prob_035():
 
 def prob_036():
     return sum(i for i in range(1, 1000000)
-               if numbers_ab.is_palindrome(str(i)) and numbers_ab.is_palindrome(bin(i)[2:]))
+               if is_palindrome(str(i)) and is_palindrome(bin(i)[2:]))
 
 
 def prob_040():
@@ -216,31 +216,31 @@ def prob_042():
     for word in words:
         value = sum((ord(c) - ord('A') + 1)
                     for c in word[1:-1])
-        if numbers_ab.is_triangle_num(value):
+        if is_triangle_num(value):
             triangles += 1
     return triangles
 
 
 def prob_043():
+    from utils_ab import iterable_to_int as converter
     total = 0
     divisors = [2, 3, 5, 7, 11, 13, 17]
-    for i in permutations(range(10)):
-        if i[0] == 0:
+    for cur_per in permutations(range(10)):
+        if cur_per[0] == 0:
             continue
 
-        temp = str(utils_ab.iterable_to_int(i))
         for j in range(7, 0, -1):
-            if int(temp[j:j + 3]) % divisors[j - 1]:
+            if converter(cur_per[j:j + 3]) % divisors[j - 1] != 0:
                 break
         else:
-            total += int(temp)
+            total += converter(cur_per)
     return total
 
 
 def prob_045():
     for i in count(286):
-        tri_num = numbers_ab.triangle_num(i)
-        if numbers_ab.is_pentagonal_num(tri_num) and numbers_ab.is_hexagonal_num(tri_num):
+        tri_num = triangle_num(i)
+        if is_pentagonal_num(tri_num) and is_hexagonal_num(tri_num):
             return tri_num
 
 

@@ -2,7 +2,6 @@ __author__ = 'Aseem'
 
 #Most of these are in functions directory
 import calendar
-import common
 import combinatorics
 import files
 import lcm
@@ -11,6 +10,8 @@ import primes
 import series
 import utils_ab
 from numbers_ab import *
+from project_euler import common
+
 from fractions import Fraction
 from itertools import count, islice, permutations, product
 

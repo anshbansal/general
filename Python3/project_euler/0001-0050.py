@@ -1,16 +1,18 @@
 __author__ = 'Aseem'
+__name__ = '0001-0050'
 
 #Most of these are in functions directory
 import calendar
 import combinatorics
+import common
 import files
 import lcm
 import math
 import primes
 import series
+import sys
 import utils_ab
 from numbers_ab import *
-from project_euler import common
 
 from fractions import Fraction
 from itertools import count, islice, permutations, product
@@ -87,6 +89,20 @@ def prob_013():
     total = sum(int(line)
                 for line in files.get_lines(RESOURCES, '013.txt'))
     return str(total)[:10]
+
+
+def prob_014():
+    recursion_limit = sys.getrecursionlimit()
+    sys.setrecursionlimit(recursion_limit * 10)
+    longest = 1
+    longest_num = 1
+    for i in range(1, 1000000):
+        current = series.len_collatz(i)
+        if current > longest:
+            longest = current
+            longest_num = i
+    sys.setrecursionlimit(recursion_limit)
+    return longest_num
 
 
 def prob_015():
@@ -329,5 +345,5 @@ def prob_047():
 def prob_048():
     return str(sum(i ** i for i in range(1, 1001)))[-10:]
 
-if __name__ == "__main__":
+if __name__ == "0001-0050":
     common.run_all(__name__)

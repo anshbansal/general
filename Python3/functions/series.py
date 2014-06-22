@@ -1,17 +1,21 @@
 __author__ = 'Aseem'
 
+from functions import common
 
-def collatz(num):
-    """"Lazily generated collatz sequence"""
-    def next_num(cur):
-        if cur % 2:
-            return 3 * cur + 1
-        else:
-            return cur // 2
 
-    while num != 1:
-        num = next_num(num)
-        yield num
+def _next_collatz(cur):
+    if cur % 2:
+        return 3 * cur + 1
+    else:
+        return cur // 2
+
+
+@common.Memoize
+def len_collatz(num):
+    if num == 1:
+        return 1
+    else:
+        return 1 + len_collatz(_next_collatz(num))
 
 
 def fibonacci(a, b, limit=None):
